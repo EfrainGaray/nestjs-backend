@@ -3,6 +3,13 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { User } from './entities/user.entity';
 import {Repository} from "typeorm";
 import {CreateUserDto, UpdateUserDto} from "./dtos";
+
+export interface UserFindEmail {
+    id?: number;
+    email?: string;
+}
+
+
 @Injectable()
 export class UserService {
     constructor(
@@ -27,7 +34,7 @@ export class UserService {
         if (!user) throw new NotFoundException('User does not exists')
 
         delete user.password;
-        return user;
+
         return  user;
     }
     async update(id,dto: UpdateUserDto): Promise<User>{
@@ -39,5 +46,11 @@ export class UserService {
         const user = await this.get(id);
         if (!user) throw new NotFoundException('User does not exists')
         return await this.userRepository.remove(user);
+    }
+    async findByEmail(data: UserFindEmail){
+        return await this.userRepository.createQueryBuilder('user')
+            .where(data)
+            .addSelect('user.password')
+            .getOne();
     }
 }
