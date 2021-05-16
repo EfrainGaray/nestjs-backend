@@ -1,10 +1,10 @@
 import {Body, Controller, Get, Post, Req, UseGuards} from '@nestjs/common';
 import { AuthService } from "./auth.service";
-import { LocalAuthGuard } from "./guards/local-auth.guard";
 import { ApiTags } from "@nestjs/swagger";
 import { LoginDto } from "./dtos/login.dto";
-import { User } from "../common/decorators";
+import {Auth, User} from "../common/decorators";
 import { User as UserEntity } from 'src/user/entities';
+import {LocalAuthGuard} from "./guards";
 
 @ApiTags('Auth routes')
 @Controller('auth')
@@ -24,9 +24,22 @@ export class AuthController {
             data,
         };
     }
-
+    @Auth()
     @Get('profile')
-    profile(){
-       return 'Estos son tus datos';
+    profile(@User() user: UserEntity) {
+        return {
+            message: 'Petición correcta',
+            user,
+        };
+    }
+
+    @Auth()
+    @Get('refresh')
+    refreshToken(@User() user: UserEntity) {
+        const data = this.authService.login(user);
+        return {
+            message: 'Refresh exitoso',
+            data,
+        };
     }
 }
