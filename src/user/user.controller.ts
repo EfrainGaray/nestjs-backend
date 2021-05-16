@@ -11,27 +11,28 @@ export class UserController {
 
     @Get()
     async all() {
-        const data = this.userService.all();
+        const data = await this.userService.all();
         return {data};
     }
     @Post()
-    async create(@Body(new ValidationPipe()) userCreate: CreateUserDto){
+    async create(@Body() userCreate: CreateUserDto){
         const data = await this.userService.create(userCreate);
-        delete data.password;
         return { message: 'User Register', data };
     }
     @Get(':id')
     async get(@Param('id') id: number){
-        const data = this.userService.get(id);
+        const data = await this.userService.get(id);
         return { data }
     }
     @Put(':id')
-    async update(@Body(new ValidationPipe()) user: UpdateUserDto, @Param('id') id: number) {
-        return this.userService.update(id,user);
+    async update(@Body() user: UpdateUserDto, @Param('id') id: number) {
+        const data =  await  this.userService.update(id,user);
+        return  { message: 'User Updated', data };
     }
     @Put(':id')
     async delete(@Param('id') id: number) {
-        return this.userService.delete(id);
+        const data =  await this.userService.delete(id);
+        return { message: 'User deleted', data };
     }
 
 }

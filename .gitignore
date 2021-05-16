@@ -3,4 +3,5 @@ node_modules/
 .env
 dist/
 ormconfig.js
+ormlogs.log
 tmp/
