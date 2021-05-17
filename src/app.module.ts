@@ -24,8 +24,8 @@ import {roles} from "./app.roles";
         database: config.get<string>(DATABASE_NAME),
         entities: [__dirname + './**/**/*entity{.ts,.js}'],
         autoLoadEntities: true,
-        synchronize: true,
-        logging: true,
+        synchronize: false,
+        logging: false,
         logger: 'file',
       })
     }),
