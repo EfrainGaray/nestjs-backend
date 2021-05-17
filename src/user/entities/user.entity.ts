@@ -17,7 +17,7 @@ export class User {
     @Column({ type: 'varchar', length: 255 })
     name: string;
 
-    @Column({ type: 'varchar', length: 255 })
+    @Column({ type: 'varchar', length: 255, select: false })
     password: string;
 
     @Column({ unique: true, type: 'varchar', length: 255})
@@ -25,6 +25,9 @@ export class User {
 
     @Column({nullable:true})
     avatar: string;
+
+    @Column({ type: 'simple-array' })
+    roles: string[];
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

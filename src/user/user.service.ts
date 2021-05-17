@@ -3,6 +3,13 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { User } from './entities/user.entity';
 import {Repository} from "typeorm";
 import {CreateUserDto, UpdateUserDto} from "./dtos";
+
+export interface UserFindEmail {
+    id?: number;
+    email?: string;
+}
+
+
 @Injectable()
 export class UserService {
     constructor(
@@ -22,22 +29,29 @@ export class UserService {
         delete user.password;
         return user;
     }
-    async get(id: number): Promise<User>{
-        const user = await this.userRepository.findOne(id);
-        if (!user) throw new NotFoundException('User does not exists')
+    async get(id: number,userEntity?: User): Promise<User>{
+        const user = await this.userRepository.findOne(id)
+            .then(u => (!userEntity ? u : !!u && userEntity.id === u.id ? u : null));
 
-        delete user.password;
+        if (!user)
+            throw new NotFoundException('User does not exists or unauthorized');
         return user;
-        return  user;
     }
-    async update(id,dto: UpdateUserDto): Promise<User>{
-        const user = await this.get(id)
+    async update(id,dto: UpdateUserDto,userEntity?: User): Promise<any>{
+        const user = await this.get(id,userEntity)
         const editedUser = Object.assign(user, dto);
-        return await this.userRepository.save(editedUser);
+        const {password, ...newUser} = await this.userRepository.save(editedUser)
+        return newUser;
     }
     async delete(id: number): Promise<User>{
         const user = await this.get(id);
         if (!user) throw new NotFoundException('User does not exists')
         return await this.userRepository.remove(user);
+    }
+    async findByEmail(data: UserFindEmail){
+        return await this.userRepository.createQueryBuilder('user')
+            .where(data)
+            .addSelect('user.password')
+            .getOne();
     }
 }

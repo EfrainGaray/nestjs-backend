@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {IsEmail, IsOptional, IsString, MaxLength, Min, MinLength} from "class-validator";
+import {IsArray, IsEmail, IsEnum, IsOptional, IsString, MaxLength,  MinLength} from "class-validator";
+import {AppRoles} from "../../app.roles";
+import {EnumToString} from "../../common/helper";
 
 export class CreateUserDto {
     @ApiProperty({required: true})
@@ -21,4 +23,11 @@ export class CreateUserDto {
     @IsOptional()
     @ApiProperty({required: false})
     readonly avatar: string;
+
+    @IsArray()
+    @IsEnum(AppRoles, {
+        each: true,
+        message: `must be a valid role value, ${EnumToString(AppRoles)}`,
+    })
+    roles: string[];
 }

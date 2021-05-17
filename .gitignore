@@ -5,3 +5,4 @@ dist/
 ormconfig.js
 ormlogs.log
 tmp/
+**/*.log
