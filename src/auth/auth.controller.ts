@@ -24,6 +24,7 @@ export class AuthController {
             data,
         };
     }
+
     @Auth()
     @Get('profile')
     profile(@User() user: UserEntity) {
@@ -32,6 +33,7 @@ export class AuthController {
             user,
         };
     }
+
 
     @Auth()
     @Get('refresh')

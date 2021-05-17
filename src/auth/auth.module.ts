@@ -22,7 +22,7 @@ import {JWT_SECRET} from "../config";
     }),
     UserModule,
   ],
-  providers: [AuthService,LocalStrategy,JwtStrategy],
-  controllers: [AuthController]
+  controllers: [AuthController],
+  providers: [AuthService, LocalStrategy, JwtStrategy],
 })
 export class AuthModule {}
