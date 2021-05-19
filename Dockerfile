@@ -1,20 +1,22 @@
-FROM node:lts-alpine as builder
+FROM node:lts-alpine as production
+WORKDIR /prod
+COPY ./package*.json ./
+RUN yarn install --production=true
 
-WORKDIR /app
+
+FROM node:lts-alpine as builder
+WORKDIR /build
 COPY ./package*.json ./
 RUN yarn
 COPY . .
 RUN yarn build
 
+
 FROM node:lts-alpine
-
-RUN apk add --no-cache bash
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
-
 WORKDIR /app
-COPY --from=builder  /app/dist ./dist
-COPY --from=builder  /app/node_modules ./node_modules
+
+COPY --from=builder  /build/dist ./dist
+COPY --from=production  /prod/node_modules ./node_modules
 
 EXPOSE 3000
 
