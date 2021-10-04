@@ -8,7 +8,7 @@ import {
     
 } from "typeorm";
 import { EnviromentParameter } from ".";
-import { Room } from "src/establishment/entities";
+import { Room } from "src/establishment/entities/room.entity";
 
 @Entity('peripheral')
 export class Peripheral {

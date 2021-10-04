@@ -1,11 +1,12 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Establishment } from './entities';
+import { Establishment, Room } from './entities';
+
 import { EstablishmentController } from './establishment.controller';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Establishment])
+    TypeOrmModule.forFeature([Establishment, Room])
 ],
   controllers: [EstablishmentController]
 })
