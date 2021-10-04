@@ -12,13 +12,14 @@ import {
 } from "typeorm";
 import {hash} from "bcrypt";
 import { Rol } from ".";
+import { Peripheral } from "src/peripheral/entities";
 
 @Entity('user')
 export class User {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ type: 'varchar', length: 150 })
+    @Column({ type: 'varchar', length: 150,unique: true })
     email: string;
 
     @Column({ type: 'varchar', length: 150 })
@@ -33,7 +34,7 @@ export class User {
     @Column({ type: 'varchar', length: 150 })
     secondLastName: string;
 
-    @Column({ type: 'varchar', length: 15 })
+    @Column({ type: 'varchar', length: 15, unique: true })
     rut: string;
 
     @Column({ type: 'varchar', length: 50 })
@@ -51,6 +52,11 @@ export class User {
     @ManyToMany(() => Rol)
     @JoinTable()
     rol: Rol[];
+
+    @ManyToMany(() => Peripheral)
+    @JoinTable()
+    peripheral: Peripheral[];
+
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
