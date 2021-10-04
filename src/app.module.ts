@@ -9,6 +9,7 @@ import { UserModule } from './user/user.module';
 import {DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME} from "./config";
 import { AuthModule } from './auth/auth.module';
 import { PeripheralModule } from './peripheral/peripheral.module';
+import { EstablishmentModule } from './establishment/establishment.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { PeripheralModule } from './peripheral/peripheral.module';
     UserModule,
     AuthModule,
     PeripheralModule,
+    EstablishmentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,10 +1,14 @@
+
 import {
     
     Column,
     Entity,  
+    OneToMany,  
     PrimaryGeneratedColumn,
     
 } from "typeorm";
+import { EnviromentParameter } from ".";
+import { Room } from "src/establishment/entities";
 
 @Entity('peripheral')
 export class Peripheral {
@@ -26,6 +30,10 @@ export class Peripheral {
     @Column({ type: 'timestamptz' })
     date_state: Date;
 
+    @OneToMany(() => EnviromentParameter, enviromentParameter => enviromentParameter.peripheral)
+    enviromentParameter: EnviromentParameter[];
 
+    @OneToMany(() => Room, room => room.peripheral)
+    room: Room[];
 
 }
