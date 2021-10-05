@@ -4,6 +4,8 @@ import {
     Column,
     Entity,  
 
+    ManyToOne,  
+
     OneToMany,  
 
     PrimaryGeneratedColumn,
@@ -37,7 +39,6 @@ export class Establishment {
     @Column({ type: 'float' })
     longitude: number; 
 
-    @OneToMany(() => User, user => user.establishment)
-    user: User[];
+   
 
 }

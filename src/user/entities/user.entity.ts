@@ -13,8 +13,8 @@ import {
 } from "typeorm";
 import {hash} from "bcrypt";
 import { Rol } from ".";
-import { Peripheral } from "src/peripheral/entities";
 import { Establishment } from "src/establishment/entities";
+import { Peripheral } from "src/peripheral/entities";
 
 @Entity('user')
 export class User {
@@ -27,9 +27,9 @@ export class User {
     @Column({ type: 'varchar', length: 150 })
     name: string;
 
-    @Column({ type: 'varchar', length: 10, select: false })
+    @Column({ type: 'varchar', length: 30, select: false })
     password: string;
-
+ 
     @Column({ type: 'varchar', length: 150 })
     primaryLastName: string;
 
@@ -45,9 +45,11 @@ export class User {
     @Column({ type: 'int' })
     state: number;
 
+  
+    @ManyToMany(() => Establishment)
+    @JoinTable()
+    establishment: Establishment[];
 
-    @ManyToOne(() => Establishment, establishment => establishment.user)
-    establishment: Establishment;
 
     @ManyToMany(() => Rol)
     @JoinTable()

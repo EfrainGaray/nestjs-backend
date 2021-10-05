@@ -25,7 +25,7 @@ import { EstablishmentModule } from './establishment/establishment.module';
         entities: [__dirname + './**/**/*entity{.ts,.js}'],
         autoLoadEntities: true,
         synchronize: true,
-        logging: true,
+        logging: false,
         logger: 'file',
       })
     }),
