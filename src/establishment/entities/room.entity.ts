@@ -2,13 +2,19 @@
 import {
     
     Column,
+    CreateDateColumn,
     Entity,  
     ManyToOne,   
+    OneToMany,   
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
     
 } from "typeorm";
 
 import { Peripheral } from "src/peripheral/entities";
+import { Person } from "src/action/entities";
+import { Session } from "./session.entity";
+
 
 @Entity('room')
 export class Room {
@@ -32,4 +38,16 @@ export class Room {
 
     @ManyToOne(() => Peripheral, peripheral => peripheral.room)
    peripheral: Peripheral;
+
+   @OneToMany(() => Person, person => person.room)
+   person: Person[];
+
+   @OneToMany(() => Session, session => session.room)
+   session: Session[];
+
+   @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+    createdAt: Date;
+
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp'})
+    updatedAt: Date;
 }

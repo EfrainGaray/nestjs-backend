@@ -10,6 +10,7 @@ import {DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE
 import { AuthModule } from './auth/auth.module';
 import { PeripheralModule } from './peripheral/peripheral.module';
 import { EstablishmentModule } from './establishment/establishment.module';
+import { ActionModule } from './action/action.module';
 
 @Module({
   imports: [
@@ -37,6 +38,7 @@ import { EstablishmentModule } from './establishment/establishment.module';
     AuthModule,
     PeripheralModule,
     EstablishmentModule,
+    ActionModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { EnviromentParameter, Peripheral } from './entities';
+import { BioepidermiologicalParameters, EnviromentParameter, Peripheral, Sensor } from './entities';
 import { PeripheralController } from './peripheral.controller';
 
 @Module({
     imports: [
-        TypeOrmModule.forFeature([Peripheral, EnviromentParameter ])
+        TypeOrmModule.forFeature([Peripheral, EnviromentParameter , BioepidermiologicalParameters, Sensor])
   ],
   controllers: [PeripheralController],
 

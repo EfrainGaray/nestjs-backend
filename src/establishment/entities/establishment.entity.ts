@@ -1,17 +1,21 @@
-import { User } from "src/user/entities";
+
 import {
 
     Column,
+    CreateDateColumn,
     Entity,  
 
     OneToMany,  
 
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
     
 } from "typeorm";
 
+import { User } from "src/user/entities";
+import { Contact } from ".";
 
-@Entity('establishment')
+@Entity('establishment') 
 export class Establishment {
     @PrimaryGeneratedColumn()
     id: number;
@@ -39,5 +43,14 @@ export class Establishment {
 
     @OneToMany(() => User, user => user.establishment)
     user: User[];
+
+    @OneToMany(() => Contact, contact => contact.establishment)
+    contact: Contact[];
+
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+    createdAt: Date;
+
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp'})
+    updatedAt: Date;
 
 }

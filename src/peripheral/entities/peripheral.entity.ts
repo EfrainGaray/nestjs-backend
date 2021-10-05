@@ -2,12 +2,14 @@
 import {
     
     Column,
+    CreateDateColumn,
     Entity,  
     OneToMany,  
     PrimaryGeneratedColumn,
+    UpdateDateColumn,
     
 } from "typeorm";
-import { EnviromentParameter } from ".";
+import { EnviromentParameter, Sensor } from ".";
 import { Room } from "src/establishment/entities/room.entity";
 
 @Entity('peripheral')
@@ -35,5 +37,14 @@ export class Peripheral {
 
     @OneToMany(() => Room, room => room.peripheral)
     room: Room[];
+
+    @OneToMany(() => Sensor, sensor => sensor.peripheral)
+    sensor: Sensor[];
+
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
+    createdAt: Date;
+
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp'})
+    updatedAt: Date;
 
 }

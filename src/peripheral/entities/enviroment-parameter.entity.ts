@@ -1,3 +1,4 @@
+import { Process } from "src/action/entities";
 import {
     Column,
     CreateDateColumn,
@@ -5,12 +6,14 @@ import {
 
     ManyToOne,
 
+    OneToMany,
+
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 
     
 } from "typeorm";
-import { Peripheral } from ".";
+import { BioepidermiologicalParameters, Peripheral } from ".";
 
 
 
@@ -57,5 +60,13 @@ export class EnviromentParameter {
 
    @ManyToOne(() => Peripheral, peripheral => peripheral.enviromentParameter)
    peripheral: Peripheral;
+
+   @OneToMany(() => BioepidermiologicalParameters, bioepidermiologicalParameters => bioepidermiologicalParameters.enviromentParameter)
+   bioepidermiologicalParameters: BioepidermiologicalParameters[];
+
+   @OneToMany(() => Process, process => process.enviromentParameter)
+   process: Process[];
+
+   
 
 }
