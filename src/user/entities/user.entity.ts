@@ -38,9 +38,6 @@ export class User {
 
     @Column({ type: 'varchar', length: 15, unique: true })
     rut: string;
-
-    @Column({ type: 'varchar', length: 50 })
-    category: string;
     
     @Column({ type: 'int' })
     state: number;
