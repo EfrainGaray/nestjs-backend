@@ -2,13 +2,10 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    JoinTable,
-    ManyToMany,
 
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
-import {  Permission } from ".";
 
 
 
@@ -23,9 +20,9 @@ export class Rol {
     @Column({ type: 'varchar', length: 255 })
     description: string;
       
-    @ManyToMany(() => Permission)
+    /*@ManyToMany(() => Permission)
     @JoinTable()
-    establishment: Permission[];
+    permission: Permission[];*/
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

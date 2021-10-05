@@ -4,7 +4,7 @@ import {
     CreateDateColumn,
     Entity,
     
-    ManyToOne,
+
     
     OneToMany,
     
@@ -12,7 +12,7 @@ import {
     UpdateDateColumn,
     
 } from "typeorm";
-import { Permission, SubMenu } from ".";
+import { SubMenu } from ".";
 
 
 
@@ -31,8 +31,8 @@ export class Menu {
 
     @Column({ type: 'varchar', length: 255 })
     link: string;
-    @ManyToOne(() => Permission, permission => permission.menu)
-    permission: Permission;
+    /*@ManyToOne(() => Permission, permission => permission.menu)
+    permission: Permission;*/
 
     @OneToMany(() => SubMenu, subMenu => subMenu.menu)
     subMenu: SubMenu[];

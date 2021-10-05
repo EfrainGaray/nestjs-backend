@@ -28,8 +28,8 @@ export class Permission {
 
 
  
-    @OneToMany(() => Menu, menu => menu.permission)
-    menu: Menu[];
+  /*  @OneToMany(() => Menu, menu => menu.permission)
+    menu: Menu[];*/
 
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
