@@ -6,6 +6,7 @@ import {
     Entity,
     JoinTable,
     ManyToMany,
+    ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn
@@ -13,6 +14,7 @@ import {
 import {hash} from "bcrypt";
 import { Rol } from ".";
 import { Peripheral } from "src/peripheral/entities";
+import { Establishment } from "src/establishment/entities";
 
 @Entity('user')
 export class User {
@@ -44,10 +46,8 @@ export class User {
     state: number;
 
 
-    //todo : Crear relación 
-    @Column({ type: 'int' })
-    idEstablishment: number;
-    // end todo
+    @ManyToOne(() => Establishment, establishment => establishment.user)
+    establishment: Establishment;
 
     @ManyToMany(() => Rol)
     @JoinTable()
