@@ -17,7 +17,7 @@ export class Permission {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column({ type: 'varchar', length: 12 })
+    @Column({ type: 'varchar', length: 12 , unique: true})
     code: string;
 
     @Column({ type: 'varchar', length: 20 })
@@ -26,8 +26,8 @@ export class Permission {
     @Column({ type: 'int' })
     state: number;
 
-    @ManyToOne(() => Rol, rol => rol.permission)
-    rol: Rol;
+    @OneToMany(() => Rol, rol => rol.permission)
+    rol: Rol[];
  
     @OneToMany(() => Menu, menu => menu.permission)
     menu: Menu[];

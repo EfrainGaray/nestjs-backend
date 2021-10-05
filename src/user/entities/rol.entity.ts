@@ -2,7 +2,8 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    OneToMany,
+    ManyToOne,
+
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
@@ -15,15 +16,15 @@ export class Rol {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column({ type: 'varchar', length: 150 })
+    @Column({ type: 'varchar', length: 150 , unique: true})
     name: string;
     
     @Column({ type: 'varchar', length: 255 })
     description: string;
       
-    @OneToMany(() => Permission, permission => permission.rol)
-    permission: Permission[];
 
+    @ManyToOne(() => Permission, permission => permission.rol)
+    permission: Permission;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
