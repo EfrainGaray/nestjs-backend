@@ -17,10 +17,12 @@ export class UserService {
     constructor(
         @InjectRepository(User) private readonly userRepository: Repository<User>
     ) {}
+    
     async all(): Promise<User[]> {
-        const  users = await this.userRepository.find({ select: ['id', 'name', 'email', 'updatedAt', 'createdAt'] })
+        const  users = await this.userRepository.find({ relations:['rol','rol.permission'] })
         return users;
     }
+    
     async create(dto: CreateUserDto): Promise<User> {
         const userExist = await this.userRepository.findOne({ email: dto.email });
         if (userExist) throw new BadRequestException('User already registered with email');
