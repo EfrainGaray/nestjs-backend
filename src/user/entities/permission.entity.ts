@@ -26,8 +26,7 @@ export class Permission {
     @Column({ type: 'int' })
     state: number;
 
-    @OneToMany(() => Rol, rol => rol.permission)
-    rol: Rol[];
+
  
     @OneToMany(() => Menu, menu => menu.permission)
     menu: Menu[];
