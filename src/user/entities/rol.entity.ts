@@ -3,9 +3,14 @@ import {
     CreateDateColumn,
     Entity,
 
+    ManyToOne,
+
+    OneToMany,
+
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
+import { Menu, RolMenuSubmenu } from ".";
 
 
 
@@ -23,7 +28,9 @@ export class Rol {
     /*@ManyToMany(() => Permission)
     @JoinTable()
     permission: Permission[];*/
-
+    @OneToMany(() => RolMenuSubmenu, rolMenuSubmenu => rolMenuSubmenu.rol)
+    rolMenuSubmenu: RolMenuSubmenu[];
+    
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
 

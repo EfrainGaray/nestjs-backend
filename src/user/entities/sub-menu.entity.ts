@@ -7,12 +7,14 @@ import {
     
     ManyToOne,
     
+    OneToMany,
+    
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 
     
 } from "typeorm";
-import { Menu } from ".";
+import { Menu, RolMenuSubmenu } from ".";
 
 @Entity('sub_menu')
 export class SubMenu {
@@ -30,10 +32,9 @@ export class SubMenu {
 
     @Column({ type: 'int'})
     level: number;
-    
-    @ManyToOne(() => Menu, menu => menu.subMenu)
-    menu: Menu;
 
+    @OneToMany(() => RolMenuSubmenu, rolMenuSubmenu => rolMenuSubmenu.rol)
+    rolMenuSubmenu: RolMenuSubmenu[];
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

@@ -6,13 +6,17 @@ import {
     
 
     
+    ManyToOne,
+    
+
+    
     OneToMany,
     
     PrimaryGeneratedColumn,
     UpdateDateColumn,
     
 } from "typeorm";
-import { SubMenu } from ".";
+import { RolMenuSubmenu, SubMenu } from ".";
 
 
 
@@ -34,9 +38,8 @@ export class Menu {
     /*@ManyToOne(() => Permission, permission => permission.menu)
     permission: Permission;*/
 
-    @OneToMany(() => SubMenu, subMenu => subMenu.menu)
-    subMenu: SubMenu[];
- 
+    @OneToMany(() => RolMenuSubmenu, rolMenuSubmenu => rolMenuSubmenu.rol)
+    rolMenuSubmenu: RolMenuSubmenu[];
     
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
