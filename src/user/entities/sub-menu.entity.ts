@@ -31,9 +31,6 @@ export class SubMenu {
     @Column({ type: 'int'})
     level: number;
     
-    @ManyToOne(() => Menu, menu => menu.subMenu)
-    menu: Menu;
-
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

@@ -18,7 +18,7 @@ export class UserService {
         @InjectRepository(User) private readonly userRepository: Repository<User>
     ) {}
     async all(): Promise<User[]> {
-        const  users = await this.userRepository.find({ select: ['id', 'name', 'email', 'updatedAt', 'createdAt'] })
+        const  users = await this.userRepository.find({ relations:['rol','rol.permission','rol.permission.menu'] })
         return users;
     }
     async create(dto: CreateUserDto): Promise<User> {
