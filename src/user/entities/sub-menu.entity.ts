@@ -32,9 +32,7 @@ export class SubMenu {
 
     @Column({ type: 'int'})
     level: number;
-
-    @OneToMany(() => RolMenuSubmenu, rolMenuSubmenu => rolMenuSubmenu.rol)
-    rolMenuSubmenu: RolMenuSubmenu[];
+    
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

@@ -3,24 +3,15 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    
-
-    
+    JoinTable,
+    ManyToMany,
     ManyToOne,
-    
-
-    
-    OneToMany,
-    
+    OneToMany,   
     PrimaryGeneratedColumn,
     UpdateDateColumn,
     
 } from "typeorm";
 import { RolMenuSubmenu, SubMenu } from ".";
-
-
-
-
 
 @Entity('menu')
 export class Menu {
@@ -35,11 +26,10 @@ export class Menu {
 
     @Column({ type: 'varchar', length: 255 })
     link: string;
-    /*@ManyToOne(() => Permission, permission => permission.menu)
-    permission: Permission;*/
-
-    @OneToMany(() => RolMenuSubmenu, rolMenuSubmenu => rolMenuSubmenu.rol)
-    rolMenuSubmenu: RolMenuSubmenu[];
+    
+    @ManyToMany(() => SubMenu)
+    @JoinTable()
+    menu: SubMenu[]; 
     
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

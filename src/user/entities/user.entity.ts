@@ -27,7 +27,7 @@ export class User {
     @Column({ type: 'varchar', length: 150 })
     name: string;
 
-    @Column({ type: 'text',  select: false })
+    @Column({ type: 'text', select: false })
     password: string;
  
     @Column({ type: 'varchar', length: 150 })
@@ -38,7 +38,7 @@ export class User {
 
     @Column({ type: 'varchar', length: 15, unique: true })
     rut: string;
-    
+
     @Column({ type: 'int' })
     state: number;
 

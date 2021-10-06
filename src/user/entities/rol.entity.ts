@@ -2,9 +2,8 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-
-    ManyToOne,
-
+    JoinTable,
+    ManyToMany,
     OneToMany,
 
     PrimaryGeneratedColumn,
@@ -25,16 +24,14 @@ export class Rol {
     @Column({ type: 'varchar', length: 255 })
     description: string;
       
-    /*@ManyToMany(() => Permission)
-    @JoinTable()
-    permission: Permission[];*/
-    @OneToMany(() => RolMenuSubmenu, rolMenuSubmenu => rolMenuSubmenu.rol)
-    rolMenuSubmenu: RolMenuSubmenu[];
-    
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
 
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp'})
     updatedAt: Date;
+
+    @ManyToMany(() => Permission)
+    @JoinTable()
+    permission: Permission[]; 
 
 }

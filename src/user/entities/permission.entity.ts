@@ -2,15 +2,14 @@ import {
     Column,
     CreateDateColumn,
     Entity,
+    JoinTable,
+    ManyToMany,
     ManyToOne,
     OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
 import { Menu, Rol } from ".";
-
-
-
 
 @Entity('permission')
 export class Permission {
@@ -25,11 +24,11 @@ export class Permission {
 
     @Column({ type: 'int' })
     state: number;
-
-
  
-  /*  @OneToMany(() => Menu, menu => menu.permission)
-    menu: Menu[];*/
+  
+    @ManyToMany(() => Menu)
+    @JoinTable()
+    menu: Menu[]; 
 
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })

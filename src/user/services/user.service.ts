@@ -19,7 +19,7 @@ export class UserService {
     ) {}
     
     async all(): Promise<User[]> {
-        const  users = await this.userRepository.find({ relations:['rol','rol.permission'] })
+        const  users = await this.userRepository.find({ relations:['rol','rol.permission','rol.permission.menu'] })
         return users;
     }
     
