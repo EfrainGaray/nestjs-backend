@@ -13,7 +13,6 @@ import {
     DEFAULT_USER_STATE 
 } from "./constants";
 
-
 export const setDefaultUser = async (config: ConfigService) => {
     const userRepository = getRepository<User>(User);
     const rolRepository = getRepository<Rol>(Rol);
@@ -179,14 +178,6 @@ export const setDefaultUser = async (config: ConfigService) => {
 
 
     if (!defaultUser) {
-
-        const adminRol = rolRepository.create({
-           name : config.get<string>(DEFAULT_ROL_NAME),
-           description: config.get<string>(DEFAULT_ROL_DESCRIPTION),
-          
-        });
-        await rolRepository.save(adminRol);
-
         const adminUser = userRepository.create({
             email: config.get<string>(DEFAULT_USER_EMAIL),
             password: config.get<string>(DEFAULT_USER_PASSWORD),
