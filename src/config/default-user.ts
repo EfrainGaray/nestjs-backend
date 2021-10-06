@@ -13,7 +13,6 @@ import {
     DEFAULT_USER_STATE 
 } from "./constants";
 
-import { DEFAULT_ROL_DESCRIPTION, DEFAULT_ROL_NAME, DEFAULT_USER_EMAIL, DEFAULT_USER_NAME, DEFAULT_USER_PASSWORD, DEFAULT_USER_PRIMARY_LAST_NAME, DEFAULT_USER_RUT, DEFAULT_USER_SECOND_LAST_NAME, DEFAULT_USER_STATE } from '.';
 
 export const setDefaultUser = async (config: ConfigService) => {
     const userRepository = getRepository<User>(User);

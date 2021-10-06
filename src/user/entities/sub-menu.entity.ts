@@ -14,7 +14,7 @@ import {
 
     
 } from "typeorm";
-import { Menu, RolMenuSubmenu } from ".";
+import { Menu } from ".";
 
 @Entity('sub_menu')
 export class SubMenu {

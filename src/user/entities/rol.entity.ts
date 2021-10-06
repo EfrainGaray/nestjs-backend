@@ -4,12 +4,11 @@ import {
     Entity,
     JoinTable,
     ManyToMany,
-    OneToMany,
-
+   
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
-import { Menu, RolMenuSubmenu } from ".";
+import { Permission} from ".";
 
 
 

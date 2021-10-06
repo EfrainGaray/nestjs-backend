@@ -4,12 +4,10 @@ import {
     Entity,
     JoinTable,
     ManyToMany,
-    ManyToOne,
-    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
-import { Menu, Rol } from ".";
+import { Menu } from ".";
 
 @Entity('permission')
 export class Permission {
