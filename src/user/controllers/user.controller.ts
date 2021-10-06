@@ -1,4 +1,4 @@
-import {Body, Controller, Get, Param, Post, Put, ValidationPipe} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, ValidationPipe} from '@nestjs/common';
 import {ApiTags} from "@nestjs/swagger";
 import { CreateUserDto, UpdateUserDto } from '../dtos';
 import {UserService} from "../services/user.service";
@@ -30,7 +30,7 @@ export class UserController {
         const data =  await  this.userService.update(id,user);
         return  { message: 'User Updated', data };
     }
-    @Put(':id')
+    @Delete(':id')
     async delete(@Param('id') id: number) {
         const data =  await this.userService.delete(id);
         return { message: 'User deleted', data };
