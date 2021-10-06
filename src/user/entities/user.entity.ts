@@ -39,7 +39,7 @@ export class User {
     @Column({ type: 'varchar', length: 15, unique: true })
     rut: string;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'int' , default: 1})
     state: number;
 
   
