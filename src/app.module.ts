@@ -6,7 +6,7 @@ import { AppService } from './app.service';
 
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import {DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME} from "./config";
+import { DATABASE_HOST, DATABASE_NAME, DATABASE_PASSWORD, DATABASE_PORT, DATABASE_USERNAME } from "./config";
 import { AuthModule } from './auth/auth.module';
 import { PeripheralModule } from './peripheral/peripheral.module';
 import { EstablishmentModule } from './establishment/establishment.module';
@@ -43,4 +43,4 @@ import { ActionModule } from './action/action.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

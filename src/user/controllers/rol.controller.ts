@@ -20,7 +20,7 @@ export class RolController {
     @Post()
     async create(@Body() rolCreate: CreateRolDto){
         const data = await this.roleService.create(rolCreate);
-        return { message: 'Rol Register', data };
+        return { message: 'Rol Registed', data };
     }
 
     

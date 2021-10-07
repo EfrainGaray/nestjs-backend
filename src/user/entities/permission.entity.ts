@@ -20,7 +20,7 @@ export class Permission {
     @Column({ type: 'varchar', length: 20 })
     type: string;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'int' , default: 1})
     state: number;
  
   

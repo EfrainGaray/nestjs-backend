@@ -18,7 +18,7 @@ export class UserController {
     @Post()
     async create(@Body() userCreate: CreateUserDto){
         const data = await this.userService.create(userCreate);
-        return { message: 'User Register', data };
+        return { message: 'User Registed', data };
     }
     @Get(':id')
     async get(@Param('id') id: number){
