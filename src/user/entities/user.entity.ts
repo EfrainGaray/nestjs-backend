@@ -33,7 +33,7 @@ export class User {
     @Column({ type: 'varchar', length: 150 })
     primaryLastName: string;
 
-    @Column({ type: 'varchar', length: 150 })
+    @Column({ type: 'varchar', length: 150, nullable: true})
     secondLastName: string;
 
     @Column({ type: 'varchar', length: 15, unique: true })
