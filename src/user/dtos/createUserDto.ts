@@ -32,7 +32,7 @@ export class CreateUserDto {
     @MaxLength(15)
     @MinLength(3)
     @ApiProperty({required: true})
-    readonly rol: string;
+    rol: string;
  
     @ApiProperty({required: false})
     readonly state: number;

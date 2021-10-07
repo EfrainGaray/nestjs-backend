@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-import { User, Rol, Menu, SubMenu, Permission,  } from "../user/entities";
+import { User, Rol, Menu, SubMenu, Permission, RolPermissionMenu,  } from "../user/entities";
 import { 
     DEFAULT_ROL_DESCRIPTION, 
     DEFAULT_ROL_NAME, 
@@ -18,6 +18,7 @@ export const setDefaultUser = async (config: ConfigService) => {
     const rolRepository = getRepository<Rol>(Rol);
     const menuRepository = getRepository<Menu>(Menu);
     const permissionMenuRepository = getRepository<Permission>(Permission);
+    const rolPermissionMenu = getRepository<RolPermissionMenu>(RolPermissionMenu);
 
     const defaultUser = await userRepository
         .createQueryBuilder()
@@ -25,6 +26,7 @@ export const setDefaultUser = async (config: ConfigService) => {
             email: config.get<string>('DEFAULT_USER_EMAIL'),
         })
         .getOne();
+
 
 
 
@@ -180,7 +182,9 @@ export const setDefaultUser = async (config: ConfigService) => {
           //  permission:[p001, p002, p003, p004, p005]
         });
 
-        //await rolRepository.save(adminRol);
+        await rolRepository.save(adminRol);
+
+
         const adminUser = userRepository.create({
             email: config.get<string>(DEFAULT_USER_EMAIL),
             password: config.get<string>(DEFAULT_USER_PASSWORD),
@@ -191,8 +195,19 @@ export const setDefaultUser = async (config: ConfigService) => {
             rut:config.get<string>(DEFAULT_USER_RUT),
             rol:[adminRol]
         });
+        for(let x = 1; x<=5;x++){
+            for(let i = 1; i<=6;i++){
+                const rolP =  rolPermissionMenu.create({
+                    permissionId: x,
+                    menuId: i,
+                    rolId: 1
+                });
+                rolPermissionMenu.save(rolP);
+            }
+           
+        }
+        
 
-
-        //return await userRepository.save(adminUser);
+        return await userRepository.save(adminUser);
     }
 };

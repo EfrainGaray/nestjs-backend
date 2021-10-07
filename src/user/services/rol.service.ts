@@ -24,7 +24,10 @@ export class RolService {
         return rols;
     }
     
- 
+    async getForCode(code: string): Promise<Rol>{
+        const rol = await this.rolRepository.findOne({ name : code });
+        return  rol;
+    }
 
     async create(dto: CreateRolDto): Promise<Rol> {
         const permissions:Permission[] = [];
