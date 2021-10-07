@@ -4,10 +4,13 @@ import {
     Entity,
     JoinTable,
     ManyToMany,
+    ManyToOne,
+    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from "typeorm";
 import { Menu } from ".";
+import { RolPermissionMenu } from "./rol-permission-menu.entity";
 
 @Entity('permission')
 export class Permission {
@@ -23,10 +26,15 @@ export class Permission {
     @Column({ type: 'int' , default: 1})
     state: number;
  
-  
+  /*
     @ManyToMany(() => Menu)
     @JoinTable()
     menu: Menu[]; 
+*/
+
+
+    @OneToMany(() => RolPermissionMenu, rolPermissionMenu => rolPermissionMenu.permission)
+    rolPermissionMenu: RolPermissionMenu;
 
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })

@@ -18,7 +18,7 @@ export const setDefaultUser = async (config: ConfigService) => {
     const rolRepository = getRepository<Rol>(Rol);
     const menuRepository = getRepository<Menu>(Menu);
     const permissionMenuRepository = getRepository<Permission>(Permission);
-    
+
     const defaultUser = await userRepository
         .createQueryBuilder()
         .where('email = :email', {
@@ -128,7 +128,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'R-001',
                 type: 'Leer',
                 state:1,
-                menu:[mpr001, mpr002, mpr003, mpr004, mpr005, mpr006]
+              //  menu:[mpr001, mpr002, mpr003, mpr004, mpr005, mpr006]
             }
         );
         await permissionMenuRepository.save(p001);
@@ -138,7 +138,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'W-001',
                 type: 'Escribir',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+               // menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
         await permissionMenuRepository.save(p002);
@@ -148,7 +148,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'U-001',
                 type: 'Editar',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+              //  menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
         await permissionMenuRepository.save(p003);
@@ -157,7 +157,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'C-001',
                 type: 'Crear',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+                //menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
         await permissionMenuRepository.save(p004);
@@ -168,7 +168,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'D-001',
                 type: 'Eliminar',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+                //menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
     
@@ -177,10 +177,10 @@ export const setDefaultUser = async (config: ConfigService) => {
         const adminRol = rolRepository.create({
             name : config.get<string>(DEFAULT_ROL_NAME),
             description: config.get<string>(DEFAULT_ROL_DESCRIPTION),
-            permission:[p001, p002, p003, p004, p005]
+          //  permission:[p001, p002, p003, p004, p005]
         });
 
-        await rolRepository.save(adminRol);
+        //await rolRepository.save(adminRol);
         const adminUser = userRepository.create({
             email: config.get<string>(DEFAULT_USER_EMAIL),
             password: config.get<string>(DEFAULT_USER_PASSWORD),
@@ -193,6 +193,6 @@ export const setDefaultUser = async (config: ConfigService) => {
         });
 
 
-        return await userRepository.save(adminUser);
+        //return await userRepository.save(adminUser);
     }
 };

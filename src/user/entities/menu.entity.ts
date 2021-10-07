@@ -12,6 +12,7 @@ import {
     
 } from "typeorm";
 import {  SubMenu } from ".";
+import { RolPermissionMenu } from "./rol-permission-menu.entity";
 
 @Entity('menu')
 export class Menu {
@@ -27,7 +28,9 @@ export class Menu {
     @Column({ type: 'varchar', length: 255 })
     link: string;
     
-     
+    @OneToMany(() => RolPermissionMenu, rolPermissionMenu => rolPermissionMenu.menu)
+    rolPermissionMenu: RolPermissionMenu;
+
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
 

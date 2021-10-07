@@ -19,15 +19,20 @@ export class UserService {
     ) {}
     
     async all(): Promise<User[]> {
-        const  users = await this.userRepository.find({ relations:['rol','rol.permission','rol.permission.menu'] })
+        const  users = await this.userRepository.find({ relations:['rol'] })
         return users;
     }
     
     async create(dto: CreateUserDto): Promise<User> {
         const userExist = await this.userRepository.findOne({ email: dto.email });
         if (userExist) throw new BadRequestException('User already registered with email');
-
-        const newUser = this.userRepository.create(dto)
+        let userTmp: User;
+        if(dto.rol){
+            Object.assign(userTmp, dto);
+            //todo 
+            delete userTmp.rol;
+        }
+        const newUser = this.userRepository.create(userTmp)
         const  user = await this.userRepository.save(newUser)
 
         delete user.password;

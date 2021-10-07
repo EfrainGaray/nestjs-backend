@@ -23,6 +23,11 @@ export class MenuService {
         return  menu;
     }
 
+    async getForCode(code: string): Promise<Menu>{
+        const menu = await this.menuRepository.findOne({ code : code });
+        return  menu;
+    }
+
     async update(id: number,dto: UpdateMenuDto): Promise<Menu>{
         const menu = await this.get(id);
 
