@@ -5,8 +5,6 @@ import {
     CreateDateColumn,
     Entity,  
 
-    ManyToOne,  
-
     OneToMany,  
 
     PrimaryGeneratedColumn,
@@ -14,7 +12,6 @@ import {
     
 } from "typeorm";
 
-import { User } from "src/user/entities";
 import { Contact } from ".";
 
 @Entity('establishment') 
@@ -31,7 +28,7 @@ export class Establishment {
     @Column({ type: 'varchar', length: 150 })
     category: string;
 
-    @Column({ type: 'varchar', length: 255, unique: true  })
+    @Column({ type: 'varchar', length: 255, unique: true })
     business_name: string;
 
     @Column({ type: 'varchar', length: 15, unique: true })

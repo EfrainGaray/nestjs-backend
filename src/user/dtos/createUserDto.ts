@@ -34,6 +34,6 @@ export class CreateUserDto {
 
     @MaxLength(150)
     @MinLength(3)
-    @ApiProperty({required: true})
+    @ApiProperty({required: false})
     readonly secondLastName: string;
 }
