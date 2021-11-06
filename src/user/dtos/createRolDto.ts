@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {IsEmail, IsInt, IsString, MaxLength,  MinLength} from "class-validator";
+import { IsArray, IsOptional, MaxLength,  Min,  MinLength} from "class-validator";
 
 export class CreateRolDto {
     @ApiProperty({required: true})
@@ -9,8 +9,13 @@ export class CreateRolDto {
 
     @ApiProperty({required: false})
     @MaxLength(255)
-    @MinLength(0)
+    @MinLength(0)    
+    @IsOptional()
     readonly description: string;
 
+
+    @ApiProperty({required: true})
+    @IsArray()
+    readonly permission: [];
 
 }

@@ -29,8 +29,15 @@ export class CreateUserDto {
     @ApiProperty({required: true})
     readonly primaryLastName: string;
 
+    @MaxLength(15)
+    @MinLength(3)
+    @ApiProperty({required: true})
+    rol: string;
+ 
     @ApiProperty({required: false})
     readonly state: number;
+
+    
 
     @MaxLength(150)
     @MinLength(3)

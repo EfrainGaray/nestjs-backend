@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { PermissionController, RolController, UserController, MenuController } from './controllers';
-import { Menu,  Permission,  Rol,  SubMenu, User } from './entities';
+import { Menu,  Permission,  Rol,  RolPermissionMenu,  SubMenu, User } from './entities';
 import { PermissionService, RolService, UserService, MenuService } from './services';
 
 
  
 @Module({
   imports: [
-        TypeOrmModule.forFeature([User, Rol, Menu, SubMenu,Permission])
+        TypeOrmModule.forFeature([User, Rol, Menu, SubMenu,Permission,RolPermissionMenu])
   ],
   controllers: [UserController, RolController, PermissionController, MenuController],
   providers: [UserService, RolService, PermissionService, MenuService],

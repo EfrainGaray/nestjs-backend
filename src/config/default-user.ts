@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
 import { ConfigService } from '@nestjs/config';
-import { User, Rol, Menu, SubMenu, Permission,  } from "../user/entities";
+import { User, Rol, Menu, SubMenu, Permission, RolPermissionMenu,  } from "../user/entities";
 import { 
     DEFAULT_ROL_DESCRIPTION, 
     DEFAULT_ROL_NAME, 
@@ -18,13 +18,15 @@ export const setDefaultUser = async (config: ConfigService) => {
     const rolRepository = getRepository<Rol>(Rol);
     const menuRepository = getRepository<Menu>(Menu);
     const permissionMenuRepository = getRepository<Permission>(Permission);
-    
+    const rolPermissionMenu = getRepository<RolPermissionMenu>(RolPermissionMenu);
+
     const defaultUser = await userRepository
         .createQueryBuilder()
         .where('email = :email', {
             email: config.get<string>('DEFAULT_USER_EMAIL'),
         })
         .getOne();
+
 
 
 
@@ -128,7 +130,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'R-001',
                 type: 'Leer',
                 state:1,
-                menu:[mpr001, mpr002, mpr003, mpr004, mpr005, mpr006]
+              //  menu:[mpr001, mpr002, mpr003, mpr004, mpr005, mpr006]
             }
         );
         await permissionMenuRepository.save(p001);
@@ -138,7 +140,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'W-001',
                 type: 'Escribir',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+               // menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
         await permissionMenuRepository.save(p002);
@@ -148,7 +150,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'U-001',
                 type: 'Editar',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+              //  menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
         await permissionMenuRepository.save(p003);
@@ -157,7 +159,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'C-001',
                 type: 'Crear',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+                //menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
         await permissionMenuRepository.save(p004);
@@ -168,7 +170,7 @@ export const setDefaultUser = async (config: ConfigService) => {
                 code: 'D-001',
                 type: 'Eliminar',
                 state:1,
-                menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
+                //menu:[mpr001,mpr002,mpr003,mpr004,mpr005]
             }
         );
     
@@ -177,10 +179,12 @@ export const setDefaultUser = async (config: ConfigService) => {
         const adminRol = rolRepository.create({
             name : config.get<string>(DEFAULT_ROL_NAME),
             description: config.get<string>(DEFAULT_ROL_DESCRIPTION),
-            permission:[p001, p002, p003, p004, p005]
+          //  permission:[p001, p002, p003, p004, p005]
         });
 
         await rolRepository.save(adminRol);
+
+
         const adminUser = userRepository.create({
             email: config.get<string>(DEFAULT_USER_EMAIL),
             password: config.get<string>(DEFAULT_USER_PASSWORD),
@@ -191,7 +195,18 @@ export const setDefaultUser = async (config: ConfigService) => {
             rut:config.get<string>(DEFAULT_USER_RUT),
             rol:[adminRol]
         });
-
+        for(let x = 1; x<=5;x++){
+            for(let i = 1; i<=6;i++){
+                const rolP =  rolPermissionMenu.create({
+                    permissionId: x,
+                    menuId: i,
+                    rolId: 1
+                });
+                rolPermissionMenu.save(rolP);
+            }
+           
+        }
+        
 
         return await userRepository.save(adminUser);
     }

@@ -19,6 +19,11 @@ export class PermissionService {
         return permissions;
     }
 
+    async getForCode(code: string): Promise<Permission>{
+        const permission = await this.permissionRepository.findOne({ code : code });
+        return  permission;
+    }
+
     async get(id: number): Promise<Permission>{
         const permission = await this.permissionRepository.findOne(id);
         if (!permission) throw new NotFoundException('Permission does not exists')

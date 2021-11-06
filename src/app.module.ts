@@ -26,7 +26,7 @@ import { ActionModule } from './action/action.module';
         entities: [__dirname + './**/**/*entity{.ts,.js}'],
         autoLoadEntities: true,
         synchronize: true,
-        logging: false,
+        logging: true,
         logger: 'file',
       })
     }),
