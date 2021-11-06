@@ -12,7 +12,7 @@ async function bootstrap() {
 
   const logger = new Logger('Bootstrap');
   const config = app.get(ConfigService);
-  const port = parseInt(config.get<string>(SERVER_PORT), 10) || 3000;
+  const port = parseInt(config.get<string>(SERVER_PORT), 10) || 3001;
   setDefaultUser(config);
 
   app.useGlobalPipes(
@@ -23,7 +23,7 @@ async function bootstrap() {
 
 
   app.setGlobalPrefix('api');
-  initSwagger(app);
+  //initSwagger(app);
 
   await app.listen(port);
   logger.log(`Server is running at ${await app.getUrl()}`);

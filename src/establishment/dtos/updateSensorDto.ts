@@ -1,5 +1,5 @@
 import { PartialType} from '@nestjs/swagger';
-import { CreateContactDto, CreateSensorDto } from '.';
+import {  CreateSensorDto } from '.';
 
 
 export class UpdateSensorDto extends PartialType(CreateSensorDto)  {}

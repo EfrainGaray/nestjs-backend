@@ -13,12 +13,13 @@ import { PeripheralController } from 'src/peripheral/peripheral.controller';
 import { ContactController } from './controllers';
 import { SessionController } from './controllers/session.controller';
 import { SessionService } from './services/session.service';
+import {Peripheral, Sensor} from "../peripheral/entities";
 
-@Module({
+@Module({                                                              
   imports: [
-    TypeOrmModule.forFeature([Establishment, Room, Contact, Session, Parameter])
+    TypeOrmModule.forFeature([Establishment, Room, Contact, Session, Parameter,Peripheral,Sensor])
 ],
   controllers: [EstablishmentController, ContactController, PeripheralController, RoomController, SensorController, SessionController],
   providers: [EstablismentService, ContactService, PeripheralService, RoomService, SensorService, SessionService]
 })
-export class EstablishmentModule {}
+export class EstablishmentModule {}                                
