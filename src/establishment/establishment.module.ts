@@ -14,12 +14,14 @@ import { ContactController } from './controllers';
 import { SessionController } from './controllers/session.controller';
 import { SessionService } from './services/session.service';
 import {Peripheral, Sensor} from "../peripheral/entities";
+import { ParameterService } from './services/parameter.service';
+import { ParameterController } from './controllers/parameter.controller';
 
 @Module({                                                              
   imports: [
     TypeOrmModule.forFeature([Establishment, Room, Contact, Session, Parameter,Peripheral,Sensor])
 ],
-  controllers: [EstablishmentController, ContactController, PeripheralController, RoomController, SensorController, SessionController],
-  providers: [EstablismentService, ContactService, PeripheralService, RoomService, SensorService, SessionService]
+  controllers: [EstablishmentController, ContactController, PeripheralController, RoomController, SensorController, SessionController, ParameterController],
+  providers: [EstablismentService, ContactService, PeripheralService, RoomService, SensorService, SessionService, ParameterService]
 })
 export class EstablishmentModule {}                                
