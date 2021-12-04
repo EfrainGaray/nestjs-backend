@@ -18,7 +18,7 @@ import { Person } from ".";
 
 
 @Entity('alarm_state')
-export class AlarmaState {
+export class AlarmState {
     @PrimaryGeneratedColumn()
     id: number;
 

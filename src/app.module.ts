@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { PeripheralModule } from './peripheral/peripheral.module';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { ActionModule } from './action/action.module';
+import { ActionsModule } from './actions/actions.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { ActionModule } from './action/action.module';
     PeripheralModule,
     EstablishmentModule,
     ActionModule,
+    ActionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

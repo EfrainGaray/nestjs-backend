@@ -42,4 +42,5 @@ export class Process {
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp'})
     updatedAt: Date;
 
+
 }
