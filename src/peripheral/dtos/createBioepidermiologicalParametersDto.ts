@@ -1,5 +1,4 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Double } from 'typeorm';
 export class CreateBioepidermiologicalParametersDto {
 
     @ApiProperty({required: true})
@@ -12,7 +11,7 @@ export class CreateBioepidermiologicalParametersDto {
     readonly death_rate: number;
 
     @ApiProperty({required: false})
-    readonly porcentage_inmunized_population: number;
+    readonly porcentage_immunized_population: number;
 
     @ApiProperty({required: false})
     readonly decay_rate: number;
