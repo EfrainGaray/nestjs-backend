@@ -11,7 +11,8 @@ export class ParameterController {
     }
 
     @Post()
-    async create(@Body() parameterService: CreateParameterDto){
+    async create(@Body() parameterService: any/*CreateParameterDto*/){
+        //console.log(parameterService);
         const data = await this.parameterService.create(parameterService);
         return { message: 'Parameter Registed', data };
     }

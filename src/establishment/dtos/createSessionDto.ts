@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength,  MinLength} from "class-validator";
-import { Double, Timestamp } from 'typeorm';
+import { Timestamp } from 'typeorm';
 import {Parameter, Room} from "../entities";
 
 export class CreateSessionDto {

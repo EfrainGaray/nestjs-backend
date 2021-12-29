@@ -11,7 +11,8 @@ export class AlarmStateController {
     }
 
     @Post()
-    async create(@Body() alarmStateCreate: CreateAlarmStateDto){
+    async create(@Body() alarmStateCreate: any/*CreateAlarmStateDto*/){
+        console.log(alarmStateCreate);
         const data = await this.alarmStateService.create(alarmStateCreate);
         return { message: 'Alarm State Registed', data };
     }

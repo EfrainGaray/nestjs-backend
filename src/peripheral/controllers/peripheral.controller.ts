@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { CreatePeripheralDto } from '../dtos';
-import { UpdatePeripheralDto } from '../dtos/updatePeripheralDto';
+import { CreatePeripheralDto, UpdatePeripheralDto } from '../dtos';
 import { PeripheralService } from '../services';
+
 
 
 @ApiTags('Peripherals routes')
@@ -13,7 +13,8 @@ export class PeripheralController {
     }
 
     @Post()
-    async create(@Body() peripheralcreate: CreatePeripheralDto){
+    async create(@Body() peripheralcreate: any /*CreatePeripheralDto*/){
+        //console.log(peripheralcreate);
         const data = await this.peripheralService.create(peripheralcreate);
         return { message: 'Peripheral Registed', data };
     }

@@ -17,7 +17,7 @@ import { Person } from ".";
 
 
 
-@Entity('alarm_state')
+@Entity('alarm-state')
 export class AlarmState {
     @PrimaryGeneratedColumn()
     id: number;
@@ -25,7 +25,7 @@ export class AlarmState {
     @Column({ type: 'varchar', length: 255})
     value: string;
 
-    @Column({ type: 'timestamptz' })
+    @Column({ type: 'varchar' , length: 50})
     date: Date;
 
     @ManyToOne(() => Person, person => person.alarmState)

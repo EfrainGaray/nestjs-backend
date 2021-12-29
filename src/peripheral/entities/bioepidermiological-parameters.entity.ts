@@ -21,7 +21,8 @@ export class BioepidermiologicalParameters {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column({ type: 'float' })
+   // @Column({ type: 'float' })
+    @Column({ type: 'int' })
     infection_posibility: number; 
 
     @Column({ type: 'float' })
@@ -30,7 +31,7 @@ export class BioepidermiologicalParameters {
     @Column({ type: 'float' })
     death_rate: number; 
 
-    @Column({ type: 'int' })
+    @Column({ type: 'integer' })
     porcentage_immunized_population: number; 
 
     @Column({ type: 'float' })

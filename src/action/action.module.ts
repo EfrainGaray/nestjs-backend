@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ActionController } from './action.controller';
-import { AlarmaState, MitigatingAction, Person, Process } from './entities';
+import { MitigatingAction, Person, Process,  AlarmState} from './entities';
 import { ProcessService } from './services/process.service';
 import { ProcessController } from './controllers/process.controller';
 import { MitigatingActionController } from './controllers/mitigating-action.controller';
@@ -13,7 +13,7 @@ import { AlarmStateService } from './services/alarm-state.service';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Process, Person, MitigatingAction, AlarmaState])
+    TypeOrmModule.forFeature([Process, Person, MitigatingAction, AlarmState])
 ],
   controllers: [ActionController, ProcessController, MitigatingActionController, PersonController, AlarmStateController],
   providers: [ProcessService, MitigatingActionService, PersonService, AlarmStateService]

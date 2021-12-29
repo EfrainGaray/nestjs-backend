@@ -11,7 +11,8 @@ export class BioepidermiologicalParametersController {
     }
     
     @Post()
-    async create(@Body() bioepidermiologicalParametersCreate: CreateBioepidermiologicalParametersDto){
+    async create(@Body() bioepidermiologicalParametersCreate: any /*CreateBioepidermiologicalParametersDto*/){
+        console.log(bioepidermiologicalParametersCreate);
         const data = await this.bioepidermiologicalParametersService.create(bioepidermiologicalParametersCreate);
         return { message: 'Bioepidermiological Parameter Registed', data };
     }

@@ -1,26 +1,23 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {IsEmail, IsString, MaxLength,  MinLength} from "class-validator";
-import { Double, Timestamp } from 'typeorm';
-import { Peripheral } from '../entities';
-
+import { Double } from 'typeorm';
 export class CreateBioepidermiologicalParametersDto {
 
     @ApiProperty({required: true})
-    readonly infection_posibility: Double;
+    readonly infection_posibility: number;
 
     @ApiProperty({required: false})
-    readonly hospitalization_rate: Double;
+    readonly hospitalization_rate: number;
 
     @ApiProperty({required: false})
-    readonly death_rate: Double;
+    readonly death_rate: number;
 
     @ApiProperty({required: false})
     readonly porcentage_inmunized_population: number;
 
     @ApiProperty({required: false})
-    readonly decay_rate: Double;
+    readonly decay_rate: number;
 
     @ApiProperty({required: false})
-    readonly deposition_surfices: Double;
+    readonly deposition_surfices: number;
 
 }

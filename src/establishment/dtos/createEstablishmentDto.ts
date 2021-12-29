@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {IsEmail, IsString, MaxLength,  MinLength} from "class-validator";
+import { Double } from 'typeorm';
 
 export class CreateEstablishmentDto {
     @ApiProperty({required: true})
@@ -21,7 +22,7 @@ export class CreateEstablishmentDto {
 
     @MaxLength(255)
     @MinLength(3)
-    @IsEmail()
+    //@IsEmail()
     @ApiProperty({required: true})
     readonly business_name: string;
 
@@ -32,10 +33,10 @@ export class CreateEstablishmentDto {
     readonly rut: string;
 
     @ApiProperty({required: false})
-    readonly latitude: number;
+    readonly latitude: Double;
 
     @ApiProperty({required: false})
-    readonly longitude: number;
+    readonly longitude: Double;
 
-    
+
 }

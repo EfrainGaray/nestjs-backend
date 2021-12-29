@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {IsEmail, IsString, MaxLength,  MinLength} from "class-validator";
+import { IsArray, MaxLength,  MinLength} from "class-validator";
+import { Person } from 'src/action/entities';
+import { Double } from 'typeorm';
+import { Session } from '../entities';
 
 export class CreateRoomDto {
     @ApiProperty({required: true})
@@ -7,29 +10,23 @@ export class CreateRoomDto {
     @MinLength(3)
     readonly name: string;
 
-    @MaxLength(150)
-    @MinLength(3)
-    @ApiProperty({required: true})
-    readonly primaryLastName: string;
 
-    @MaxLength(150)
-    @MinLength(3)
     @ApiProperty({required: false})
-    readonly secondLastName: string;
+    readonly capacity: number;
 
-    @IsString()
-    @MaxLength(150)
-    @MinLength(3)
-    @ApiProperty({required: true})
-    readonly position: string;
-
-    @IsString()
-    @MaxLength(15)
-    @MinLength(3)
     @ApiProperty({required: false})
-    readonly email: string;
+    readonly height: number;
 
+    @ApiProperty({required: false})
+    readonly width: number;
 
-
+    @ApiProperty({required: false})
+    readonly length: number;
     
+    @ApiProperty({required: false})
+    readonly session: [];
+
+    @ApiProperty({required: false})
+    readonly person: [];
 }
+

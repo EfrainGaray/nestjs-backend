@@ -11,8 +11,8 @@ export class EnviromentParameterService {
     ) {}
     
     async create(dto: CreateEnviromentalParameterDto): Promise<EnviromentParameter> {
-        const enviromentParameterExist = await this.enviromentalParameterRepository.findOne({ date_time: dto.date_time });
-        if (enviromentParameterExist) throw new BadRequestException('Room already registered with name');
+        const enviromentParameterExist = await this.enviromentalParameterRepository.findOne({ temperature: dto.temperature });
+        if (enviromentParameterExist) throw new BadRequestException('Enviroment Parameter already registered with name');
 
         const newEnviromentParameter = this.enviromentalParameterRepository.create(dto)
         const  enviromentalParameter = await this.enviromentalParameterRepository.save(newEnviromentParameter)

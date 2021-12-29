@@ -1,6 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { CreateSensorDto, UpdateSensorDto } from '../dtos';
+
 import { SensorService } from '../services/sensor.service';
 
 

@@ -11,7 +11,8 @@ export class ProcessController {
     }
 
     @Post()
-    async create(@Body() processCreate: CreateProcessDto){
+    async create(@Body() processCreate: any/*CreateProcessDto*/){
+        //console.log(processCreate);
         const data = await this.processService.create(processCreate);
         return { message: 'Process Registed', data };
     }

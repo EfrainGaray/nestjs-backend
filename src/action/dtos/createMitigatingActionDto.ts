@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {IsEmail, IsString, MaxLength,  MinLength} from "class-validator";
-import { Timestamp } from 'typeorm';
+import { MaxLength,  MinLength} from "class-validator";
+
 
 export class CreateMitigatingActionDto {
     @ApiProperty({required: true})
@@ -12,11 +12,6 @@ export class CreateMitigatingActionDto {
     @MaxLength(100)
     @MinLength(3)
     readonly type: string;
-    
-    @ApiProperty({required: false})
-    @MaxLength(255)
-    @MinLength(3)
-    readonly steps: string;
 
     @ApiProperty({required: false})
     readonly personId: number;

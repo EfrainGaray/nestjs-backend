@@ -35,7 +35,8 @@ export class EstablishmentController {
     }
 
     @Post()
-    async create(@Body() establishmentCreate: CreateEstablishmentDto){
+    async create(@Body() establishmentCreate: any /*CreateEstablishmentDto*/){
+        console.log(establishmentCreate);
         const data = await this.establishmentService.create(establishmentCreate);
         return { message: 'Establishment Registed', data };
     }

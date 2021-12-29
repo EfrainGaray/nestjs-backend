@@ -21,7 +21,7 @@ import {
     UpdateDateColumn,
     
 } from "typeorm";
-import { AlarmaState, MitigatingAction } from ".";
+import { AlarmState, MitigatingAction } from ".";
 
 
 
@@ -51,8 +51,8 @@ export class Person {
     @OneToMany(() => MitigatingAction, mitigatingAction => mitigatingAction.person)
     mitigatingAction: MitigatingAction[];
 
-    @OneToMany(() => AlarmaState, alarmState => alarmState.person)
-    alarmState: AlarmaState[];
+    @OneToMany(() => AlarmState, alarmState => alarmState.person)
+    alarmState: AlarmState[];
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

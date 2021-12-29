@@ -4,6 +4,7 @@ import { Sensor } from 'src/peripheral/entities';
 import { Repository } from 'typeorm';
 import { CreateSensorDto, UpdateSensorDto } from '../dtos';
 
+
 @Injectable()
 export class SensorService {
     constructor(
@@ -17,7 +18,7 @@ export class SensorService {
         const newSensor = this.sensorRepository.create(dto)
         const  sensor = await this.sensorRepository.save(newSensor)
 
-        //delete establishment.password;
+
         return sensor;
     }
 

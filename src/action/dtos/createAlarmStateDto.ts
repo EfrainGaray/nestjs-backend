@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { MaxLength,  MinLength} from "class-validator";
-import { Timestamp } from 'typeorm';
+
 
 export class CreateAlarmStateDto {
     @ApiProperty({required: true})
@@ -9,7 +9,7 @@ export class CreateAlarmStateDto {
     readonly value: string;
     
     @ApiProperty({required: false})
-    readonly date: Timestamp;
+    readonly date: string;
 
 
     @ApiProperty({required: false})

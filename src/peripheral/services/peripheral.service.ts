@@ -1,8 +1,9 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Peripheral } from 'src/peripheral/entities';
 import { Repository } from 'typeorm';
 import { CreatePeripheralDto, UpdatePeripheralDto } from '../dtos';
+
+import { Peripheral } from '../entities';
 
 @Injectable()
 export class PeripheralService {
@@ -13,7 +14,7 @@ export class PeripheralService {
 
     async create(dto: CreatePeripheralDto): Promise<Peripheral> {
         const peripheralExist = await this.peripheralRepository.findOne({ name: dto.name });
-        if (peripheralExist) throw new BadRequestException('Peripheral already registered with email');
+        if (peripheralExist) throw new BadRequestException('Peripheral already registered with name');
 
         const newPeripheral = this.peripheralRepository.create(dto)
         const  peripheral = await this.peripheralRepository.save(newPeripheral)

@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { MaxLength,  MinLength} from "class-validator";
+import { IsEmail, MaxLength,  MinLength} from "class-validator";
 
 export class CreatePersonDto {
     @ApiProperty({required: true})
     @MaxLength(15)
-    @MinLength(15)
+    @MinLength(10)
     readonly rut: string;
     
     @ApiProperty({required: true})
@@ -25,6 +25,7 @@ export class CreatePersonDto {
     @ApiProperty({required: false})
     @MaxLength(150)
     @MinLength(3)
+    @IsEmail()
     readonly email: string;
 
     @ApiProperty({required: false})

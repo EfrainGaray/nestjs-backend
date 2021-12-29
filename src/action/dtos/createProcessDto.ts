@@ -5,7 +5,7 @@ import { Timestamp } from 'typeorm';
 export class CreateProcessDto {
     @ApiProperty({required: true})
     @MaxLength(15)
-    @MinLength(15)
+    @MinLength(10)
     readonly rut_person: string;
 
     @ApiProperty({required: false})

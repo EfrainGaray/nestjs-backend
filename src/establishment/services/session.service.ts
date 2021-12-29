@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateSessionDto, UpdateSessionDto } from '../dtos';
+
 import { Session } from '../entities';
 
 

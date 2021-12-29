@@ -11,7 +11,8 @@ export class RoomController {
     }
 
     @Post()
-    async create(@Body() roomCreate: CreateRoomDto){
+    async create(@Body() roomCreate: any /*CreateRoomDto*/){
+        //console.log(roomCreate);
         const data = await this.roomService.create(roomCreate);
         return { message: 'Room Registed', data };
     }

@@ -3,6 +3,7 @@ import {
 
     Column,
     CreateDateColumn,
+    Double,
     Entity,  
 
     OneToMany,  
@@ -35,10 +36,10 @@ export class Establishment {
     rut: string;
 
     @Column({ type: 'float' })
-    latitude: number; 
+    latitude: Double; 
 
     @Column({ type: 'float' })
-    longitude: number; 
+    longitude: Double; 
 
    
 

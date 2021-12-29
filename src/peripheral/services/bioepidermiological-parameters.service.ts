@@ -12,7 +12,7 @@ export class BioepidermiologicalParametersService {
     ) {}
 
     async create(dto: CreateBioepidermiologicalParametersDto): Promise<BioepidermiologicalParameters> {
-        const bioepidermiologicalParametersExist = await this.bioepidermiologicalParametersRepository.findOne({ id: dto.id});
+        const bioepidermiologicalParametersExist = await this.bioepidermiologicalParametersRepository.findOne({ infection_posibility: dto.infection_posibility});
         if (bioepidermiologicalParametersExist) throw new BadRequestException('Bioepidermiological Parameter already registered with name');
 
         const newBioepidermiologicalParameters = this.bioepidermiologicalParametersRepository.create(dto)
@@ -33,7 +33,7 @@ export class BioepidermiologicalParametersService {
         if (!bioepidermiologicalParameters) throw new NotFoundException('Bioepidermiological Parameter does not exists')
 
 
-        return  room;
+        return  bioepidermiologicalParameters;
     }
 
     async delete(id: number): Promise<BioepidermiologicalParameters>{
