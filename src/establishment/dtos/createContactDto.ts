@@ -24,12 +24,13 @@ export class CreateContactDto {
     readonly position: string;
 
     @IsString()
-    @MaxLength(15)
+    @MaxLength(150)
     @MinLength(3)
     @ApiProperty({required: false})
     readonly email: string;
 
-
+    @ApiProperty({required: false})
+    readonly establishmentId: number
 
     
 }

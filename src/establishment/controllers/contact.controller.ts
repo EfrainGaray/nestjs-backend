@@ -11,7 +11,7 @@ export class ContactController {
     }
 
     @Post()
-    async create(@Body() contactCreate: CreateContactDto){
+    async create(@Body() contactCreate: any/*CreateContactDto*/){
         const data = await this.contactService.create(contactCreate);
         return { message: 'Contact Registed', data };
     }
