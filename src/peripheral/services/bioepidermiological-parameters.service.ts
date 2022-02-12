@@ -23,7 +23,7 @@ export class BioepidermiologicalParametersService {
     }
 
     async update(id,dto: updateBioepidermiologicalParametersDto): Promise<BioepidermiologicalParameters>{
-        const bioepidermiologicalParameters = await this.get(id)
+        const bioepidermiologicalParameters = await this.get(id);
         const editedBioepidermiologicalParameters = Object.assign(bioepidermiologicalParameters, dto);
         return await this.bioepidermiologicalParametersRepository.save(editedBioepidermiologicalParameters);
     }

@@ -17,6 +17,6 @@ export class CreateBioepidermiologicalParametersDto {
     readonly decay_rate: number;
 
     @ApiProperty({required: false})
-    readonly deposition_surfices: number;
+    readonly deposition_surficies: number;
 
 }

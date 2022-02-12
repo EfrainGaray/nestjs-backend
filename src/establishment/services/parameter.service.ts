@@ -14,8 +14,8 @@ export class ParameterService {
     async create(dto: CreateParameterDto): Promise<Parameter> {
         const parameterExist = await this.parameterRepository.findOne({ people_infected: dto.people_infected });
         if (parameterExist) throw new BadRequestException('Parameter already registered');
-
-        const newParameter = this.parameterRepository.create(dto)
+       
+        const newParameter = this.parameterRepository.create(dto);
         const  parameter = await this.parameterRepository.save(newParameter)
 
         //delete establishment.password;
@@ -23,7 +23,7 @@ export class ParameterService {
     }
 
     async update(id,dto: UpdateParameterDto): Promise<Parameter>{
-        const parameter = await this.get(id)
+        const parameter = await this.get(id);
         const editedParameter = Object.assign(parameter, dto);
         return await this.parameterRepository.save(editedParameter);
     }

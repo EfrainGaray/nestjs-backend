@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, MaxLength,  MinLength} from "class-validator";
+
 
 export class CreateParameterDto {
 
@@ -26,8 +26,6 @@ export class CreateParameterDto {
 
 
     @ApiProperty({required: true})
-    @MaxLength(255)
-    @MinLength(3)
-    readonly additional_measures: string;
+    readonly additional_measures: number;
 
 }

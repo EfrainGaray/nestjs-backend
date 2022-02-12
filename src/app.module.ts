@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { PeripheralModule } from './peripheral/peripheral.module';
 import { EstablishmentModule } from './establishment/establishment.module';
 import { ActionModule } from './action/action.module';
+import { RiskIndexModule } from './risk-index/risk-index.module';
+
 
 
 @Module({
@@ -39,7 +41,8 @@ import { ActionModule } from './action/action.module';
     AuthModule,
     PeripheralModule,
     EstablishmentModule,
-    ActionModule
+    ActionModule,
+    RiskIndexModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -25,19 +25,19 @@ export class BioepidermiologicalParameters {
     @Column({ type: 'int' })
     infection_posibility: number; 
 
-    @Column({ type: 'float' })
+    @Column({ type: 'double precision' })
     hospitalization_rate: number; 
 
-    @Column({ type: 'float' })
+    @Column({ type: 'double precision' })
     death_rate: number; 
 
     @Column({ type: 'integer' })
     porcentage_immunized_population: number; 
 
-    @Column({ type: 'float' })
+    @Column({ type: 'double precision' })
     decay_rate: number; 
 
-    @Column({ type: 'float' })
+    @Column({ type: 'double precision' })
     deposition_surficies: number; 
 
     @ManyToOne(() => EnviromentParameter, enviromentParameter => enviromentParameter.bioepidermiologicalParameters)

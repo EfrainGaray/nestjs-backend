@@ -26,23 +26,23 @@ export class Parameter {
     @Column({ type: 'int' })
     people_infected: number;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'double precision' })
     exhalation_rate: number;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'double precision' })
     respiratory_rate: number;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'double precision' })
     CO2_emission: number;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'double precision' })
     inhalation_efficiency: number;
 
-    @Column({ type: 'int' })
+    @Column({ type: 'double precision' })
     exhalation_efficiency: number;
 
-    @Column({ type: 'varchar', length: 255 })
-    additional_measures: string;
+    @Column({ type: 'int' })
+    additional_measures: number;
 
     @ManyToOne(() => Session, session => session.parameter)
     session: Session;
