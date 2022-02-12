@@ -1,11 +1,13 @@
 import {Body, Controller, Delete, Get, Param, Post, Put} from '@nestjs/common';
 import { ApiTags } from "@nestjs/swagger";
 import { UserService } from "./user.service";
-import { UpdateUserDto, UserRegistrationDto} from "./dtos";
+
 import {Auth, User} from "../common/decorators";
 import {AppResource, AppRoles} from "../app.roles";
 import {InjectRolesBuilder, RolesBuilder} from "nest-access-control";
 import {User as UserEntity} from './entities'
+import { UserRegistrationDto } from './dtos/user-registration.dto';
+import { UpdateUserDto } from './dtos';
 
 @ApiTags('Users routes')
 @Controller('user')

@@ -2,9 +2,10 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import {Logger, ValidationPipe} from "@nestjs/common";
 import {initSwagger} from "./app.swagger";
-import {setDefaultUser} from "./config/default-user";
+
 import {ConfigService} from "@nestjs/config";
 import {SERVER_PORT} from "./config";
+import { setDefaultUser } from './config/default-user';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
