@@ -39,13 +39,18 @@ export class EstablismentService {
     }
 
     async create(dto: CreateEstablishmentDto): Promise<Establishment> {
-        const userExist = await this.establishmentRepository.findOne({ rut: dto.rut });
-        if (userExist) throw new BadRequestException('Establishment already registered with rut');
+        const establismentExist = await this.establishmentRepository.findOne({ rut: dto.rut });
+        if (establismentExist) throw new BadRequestException('Establishment already registered with rut');
 
         const newEstablishment = this.establishmentRepository.create(dto)
         const  establishment = await this.establishmentRepository.save(newEstablishment)
 
         //delete establishment.password;
         return establishment;
+    }
+
+    async getForRut(rut: string): Promise<Establishment>{
+        const establishment = await this.establishmentRepository.findOne({ rut: rut });
+        return  establishment;
     }
 }

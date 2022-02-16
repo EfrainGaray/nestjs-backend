@@ -47,4 +47,9 @@ export class PeripheralService {
         const  peripheral = await this.peripheralRepository.find({  })
         return peripheral;
     }
+
+    async getForName(name: string): Promise<Peripheral>{
+        const peripheral = await this.peripheralRepository.findOne({ name: name });
+        return  peripheral;
+    }
 }
