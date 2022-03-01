@@ -12,7 +12,7 @@ async function bootstrap() {
 
   const logger = new Logger('Bootstrap');
   const config = app.get(ConfigService);
-  const port = parseInt(config.get<string>(SERVER_PORT), 10) || 3001;
+  const port = parseInt(config.get<string>(SERVER_PORT), 10) || 3000;
   setDefaultUser(config);
 
   app.useGlobalPipes(
@@ -20,7 +20,7 @@ async function bootstrap() {
         whitelist: true,
       }),
   );
-
+  app.enableCors();
 
   app.setGlobalPrefix('api');
   //initSwagger(app);

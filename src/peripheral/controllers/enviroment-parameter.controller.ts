@@ -12,7 +12,6 @@ export class EnviromentParameterController {
 
     @Post()
     async create(@Body() enviromentParameter: any){ //revisar
-        console.log(enviromentParameter);
         const data = await this.enviromentParameterService.create(enviromentParameter);
         return { message: 'Enviroment Parameter Registed', data };
     }
@@ -32,6 +31,7 @@ export class EnviromentParameterController {
     @Get()
     async all() {
         const data = await this.enviromentParameterService.all();
+        console.log(data);
         return {data};
     }
 

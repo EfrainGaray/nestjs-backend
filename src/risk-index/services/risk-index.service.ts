@@ -15,8 +15,10 @@ export class RiskIndexService {
         @InjectRepository(BioepidermiologicalParameters) private readonly bioepidermiologicalParametersRepository: Repository<BioepidermiologicalParameters>
     ) {}
 
-    async riskValue(): Promise<Number>{    
-        const CO2 = await this.enviromentalParameterRepository.createQueryBuilder("enviroment_parameter").select("enviroment_parameter.CO2, enviroment_parameter.id").orderBy("enviroment_parameter.id", "DESC").getRawOne();
+    async riskValue(co2:number): Promise<Number>{
+        console.log(co2);
+        //const CO2 = await this.enviromentalParameterRepository.createQueryBuilder("enviroment_parameter").select("enviroment_parameter.CO2, enviroment_parameter.id").orderBy("enviroment_parameter.id", "DESC").getRawOne();
+        const CO2 = co2;
         const roomData = await this.roomRepository.createQueryBuilder("room").select("room.length, room.height, room.width").getRawOne();
         const sessionData = await this.sessionRepository.createQueryBuilder("session").select("session.background_CO2, session.duration, session.exterior_ventilation").getRawOne();
         const bioEpidermioData = await this.bioepidermiologicalParametersRepository.createQueryBuilder("bioepidermiological_parameters").select("bioepidermiological_parameters.decay_rate, bioepidermiological_parameters.deposition_surficies").getRawOne();
@@ -34,7 +36,7 @@ export class RiskIndexService {
         const quantaInhaledPerson = avgQuantaConcentration * parameterData.respiratory_rate * duration2 * (1 -( parameterData.inhalation_efficiency/100) * (parameterData.persons_with_mask/100));
         const infectionProbability = 1 - Math.exp(quantaInhaledPerson * -1);
 
-        const CO2reInhaled = (CO2.CO2-sessionData.background_CO2) * duration2;
+        const CO2reInhaled = (CO2-sessionData.background_CO2) * duration2;
         const CO2reInhaledPor = CO2reInhaled / 10000; 
         var ratioProbInfection = Number((infectionProbability/CO2reInhaledPor).toFixed(3));
 

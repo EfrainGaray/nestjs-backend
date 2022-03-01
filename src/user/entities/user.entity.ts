@@ -39,6 +39,10 @@ export class User {
     @Column({ type: 'varchar', length: 15, unique: true })
     rut: string;
 
+
+    @Column({ type: 'varchar', length: 255,default: null})
+    avatar: string;
+
     @Column({ type: 'int' , default: 1})
     state: number;
 
