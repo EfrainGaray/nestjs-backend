@@ -41,6 +41,7 @@ export class EnviromentParameterService {
     }
 
     async get(id: number): Promise<EnviromentParameter>{
+        
         const enviromentalParameter = await this.enviromentalParameterRepository.findOne(id,{relations:['peripheral']});
         if (!enviromentalParameter) throw new NotFoundException('Enviroment Parameter does not exists')
 
@@ -55,7 +56,11 @@ export class EnviromentParameterService {
     }
 
     async all(): Promise<EnviromentParameter[]> {
-        const  enviromentalParameter = await this.enviromentalParameterRepository.find({relations:['peripheral']})
+
+        const  enviromentalParameter = await this.enviromentalParameterRepository.find({order: {
+                id: "DESC",
+            },
+            take:1,relations:['peripheral']})
         return enviromentalParameter;
     }
 
