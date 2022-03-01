@@ -13,7 +13,6 @@ export class SessionController {
 
     @Post()
     async create(@Body() sessionCreate: any/*CreateSessionDto*/){
-        console.log(sessionCreate);
         const data = await this.sessionService.create(sessionCreate);
         return { message: 'Session Registed', data };
     }

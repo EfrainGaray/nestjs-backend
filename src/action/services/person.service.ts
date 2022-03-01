@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { RoomService } from 'src/establishment/services';
 import { Repository } from 'typeorm';
 import { CreatePersonDto, UpdatePersonDto } from '../dtos';
 import { Person } from '../entities';
@@ -8,17 +9,25 @@ import { Person } from '../entities';
 export class PersonService {
 
     constructor(
-        @InjectRepository(Person) private readonly personRepository: Repository<Person>
+        @InjectRepository(Person) private readonly personRepository: Repository<Person>,
+        public roomServices: RoomService
     ) {}
 
     async create(dto: CreatePersonDto): Promise<Person> {
         const personExist = await this.personRepository.findOne({ rut: dto.rut });
         if (personExist) throw new BadRequestException('Person already registered with rut');
 
-        const newPerson = this.personRepository.create(dto)
+        const newPerson = this.personRepository.create({
+            rut:dto.rut,
+            name: dto.name,
+            primaryLastName:dto.primaryLastName,
+            secondLastName:dto.secondLastName,
+            email:dto.email,
+            room:await this.roomServices.getForName(dto.nameRoom)
+        })
         const  person = await this.personRepository.save(newPerson)
 
-        //delete establishment.password;
+       
         return person;
     }
 
@@ -29,7 +38,7 @@ export class PersonService {
     }
 
     async get(id: number): Promise<Person>{
-        const person = await this.personRepository.findOne(id);
+        const person = await this.personRepository.findOne(id, {relations:['room']});
         if (!person) throw new NotFoundException('Person does not exists')
 
 
@@ -43,7 +52,13 @@ export class PersonService {
     }
 
     async all(): Promise<Person[]> {
-        const  person = await this.personRepository.find({  })
+        const  person = await this.personRepository.find({relations:['room']})
         return person;
+    }
+
+    async getForRut(rutF: string): Promise<Person>{
+        const person = await this.personRepository.findOne({ rut: rutF });
+        if (!person) throw new NotFoundException('Person does not exists')
+        return  person;
     }
 }

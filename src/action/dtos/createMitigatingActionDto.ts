@@ -14,6 +14,8 @@ export class CreateMitigatingActionDto {
     readonly type: string;
 
     @ApiProperty({required: false})
-    readonly personId: number;
+    @MaxLength(100)
+    @MinLength(3)
+    readonly personRut: string;
 
 }

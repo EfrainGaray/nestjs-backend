@@ -1,8 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, MaxLength,  MinLength} from "class-validator";
-import { Person } from 'src/action/entities';
-import { Double } from 'typeorm';
-import { Session } from '../entities';
+import { MaxLength,  MinLength} from "class-validator";
+
 
 export class CreateRoomDto {
     @ApiProperty({required: true})
@@ -28,5 +26,10 @@ export class CreateRoomDto {
 
     @ApiProperty({required: false})
     readonly person: [];
+
+    @ApiProperty({required: false})
+    @MaxLength(150)
+    @MinLength(3)
+    readonly namePeripheral: string;
 }
 

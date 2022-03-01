@@ -29,8 +29,11 @@ export class CreateContactDto {
     @ApiProperty({required: false})
     readonly email: string;
 
-    @ApiProperty({required: false})
-    readonly establishmentId: number
+    @IsString()
+    @MaxLength(15)
+    @MinLength(10)
+    @ApiProperty({required: true})
+    rutEstablishment: string;
 
     
 }

@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { MaxLength, MinLength } from 'class-validator';
 
 
 export class CreateParameterDto {
@@ -24,8 +25,13 @@ export class CreateParameterDto {
     @ApiProperty({required: false})
     readonly exhalation_efficiency: number;
 
-
     @ApiProperty({required: true})
     readonly additional_measures: number;
+
+    @ApiProperty({required: false})
+    @MaxLength(150)
+    @MinLength(3)
+    readonly sessionDate: string;
+    
 
 }

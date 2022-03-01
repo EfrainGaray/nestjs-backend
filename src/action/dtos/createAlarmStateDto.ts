@@ -13,5 +13,7 @@ export class CreateAlarmStateDto {
 
 
     @ApiProperty({required: false})
-    readonly personId: number;
+    @MaxLength(150)
+    @MinLength(3)
+    readonly personRut: string;
 }

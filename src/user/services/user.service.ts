@@ -25,7 +25,7 @@ export class UserService {
     ) {}
     
     async all(): Promise<User[]> {
-        const  users = await this.userRepository.find({ relations:['rol'] })
+        const  users = await this.userRepository.find({relations: ['rol', 'establishment', 'peripheral']})
         return users;
     }
     
@@ -37,12 +37,12 @@ export class UserService {
             if (!rol) throw new BadRequestException('Rol not created');
         }
 
-        if(!dto.rutEstablishment){
+        if(dto.rutEstablishment){
             const rutEstablishment = await this.establishmentServices.getForRut(dto.rutEstablishment);
             if (!rutEstablishment) throw new BadRequestException('Establishment does not exists');
         }
         
-       if(!dto.namePeripheral){
+       if(dto.namePeripheral){
             var namePeripheral = await this.peripheralServices.getForName(dto.namePeripheral);
             if (!namePeripheral) throw new BadRequestException('Peripheral does not exists');
         }

@@ -23,8 +23,12 @@ export class CreateProcessDto {
     readonly updated_at: Timestamp;
 
     @ApiProperty({required: false})
-    readonly enviromentParameterId: number;
+    @MaxLength(255)
+    @MinLength(3)
+    readonly enviromentParameterDate: string;
 
     @ApiProperty({required: false})
-    readonly mitigatingActionId: number;
+    @MaxLength(255)
+    @MinLength(3)
+    readonly mitigatingActionName: string;
 }

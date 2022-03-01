@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { MaxLength, MinLength } from 'class-validator';
 import { Timestamp } from 'typeorm';
 import {Parameter, Room} from "../entities";
 
@@ -20,9 +21,12 @@ export class CreateSessionDto {
     readonly event_repeats: number;
 
     @ApiProperty({required: false})
-    
-    readonly room: Room;
+    @MaxLength(150)
+    @MinLength(3)
+    readonly roomName: string;
 
-
-    readonly parameter: Parameter[]
+    @ApiProperty({required: false})
+    @MaxLength(150)
+    @MinLength(3)
+    readonly parameter: Parameter
 }

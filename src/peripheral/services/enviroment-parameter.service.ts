@@ -7,17 +7,30 @@ import { EnviromentParameter } from '../entities';
 @Injectable()
 export class EnviromentParameterService {
     constructor(
-        @InjectRepository(EnviromentParameter) private readonly enviromentalParameterRepository: Repository<EnviromentParameter>
+        @InjectRepository(EnviromentParameter) private readonly enviromentalParameterRepository: Repository<EnviromentParameter>, 
+       // public peripheralServices: PeripheralService
     ) {}
     
     async create(dto: CreateEnviromentalParameterDto): Promise<EnviromentParameter> {
         const enviromentParameterExist = await this.enviromentalParameterRepository.findOne({ temperature: dto.temperature });
         if (enviromentParameterExist) throw new BadRequestException('Enviroment Parameter already registered with name');
 
-        const newEnviromentParameter = this.enviromentalParameterRepository.create(dto)
+        const newEnviromentParameter = this.enviromentalParameterRepository.create({
+                date_time: dto.date_time,
+                relative_humidity: dto.relative_humidity,
+                temperature: dto.temperature,
+                pressure: dto.pressure,
+                CO2: dto.CO2,
+                CO2_alarm:dto.CO2_alarm,
+                algorithm_result:dto.algorithm_result,
+                SGP40_voc_index: dto.SPG40_voc_index,
+                SGP40_emp:dto.SPG40_emp,
+                SGP40_hr:dto.SPG40_hr,
+                //peripheral:await this.peripheralServices.getForName(dto.namePeripheral)
+             }
+        )
         const  enviromentalParameter = await this.enviromentalParameterRepository.save(newEnviromentParameter)
 
-        //delete establishment.password;
         return enviromentalParameter;
     }
 
@@ -28,7 +41,7 @@ export class EnviromentParameterService {
     }
 
     async get(id: number): Promise<EnviromentParameter>{
-        const enviromentalParameter = await this.enviromentalParameterRepository.findOne(id);
+        const enviromentalParameter = await this.enviromentalParameterRepository.findOne(id,{relations:['peripheral']});
         if (!enviromentalParameter) throw new NotFoundException('Enviroment Parameter does not exists')
 
 
@@ -42,9 +55,14 @@ export class EnviromentParameterService {
     }
 
     async all(): Promise<EnviromentParameter[]> {
-        const  enviromentalParameter = await this.enviromentalParameterRepository.find({  })
+        const  enviromentalParameter = await this.enviromentalParameterRepository.find({relations:['peripheral']})
         return enviromentalParameter;
     }
 
+    async getForDate(dateTime: string): Promise<EnviromentParameter>{
+        const enviromentalParameter = await this.enviromentalParameterRepository.findOne({ date_time: dateTime });
+        if (!enviromentalParameter) throw new NotFoundException('Enviroment Parameter does not exists')
+        return  enviromentalParameter;
+    }
 
 }

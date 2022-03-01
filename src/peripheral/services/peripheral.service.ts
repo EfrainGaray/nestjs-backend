@@ -19,7 +19,6 @@ export class PeripheralService {
         const newPeripheral = this.peripheralRepository.create(dto)
         const  peripheral = await this.peripheralRepository.save(newPeripheral)
 
-        //delete establishment.password;
         return peripheral;
     }
 
@@ -30,7 +29,7 @@ export class PeripheralService {
     }
 
     async get(id: number): Promise<Peripheral>{
-        const peripheral = await this.peripheralRepository.findOne(id);
+        const peripheral = await this.peripheralRepository.findOne(id, { relations:['room', 'sensor', 'enviroment_parameter'] });
         if (!peripheral) throw new NotFoundException('Peripheral does not exists')
 
 
@@ -44,12 +43,13 @@ export class PeripheralService {
     }
 
     async all(): Promise<Peripheral[]> {
-        const  peripheral = await this.peripheralRepository.find({  })
+        const  peripheral = await this.peripheralRepository.find({ relations:['room', 'sensor', 'enviroment_parameter'] })
         return peripheral;
     }
 
     async getForName(name: string): Promise<Peripheral>{
         const peripheral = await this.peripheralRepository.findOne({ name: name });
+        if (!peripheral) throw new NotFoundException('Peripheral does not exists')
         return  peripheral;
     }
 }

@@ -8,6 +8,8 @@ export class CreateSensorDto {
     readonly name: string;
 
     @ApiProperty({required: false})
-    readonly peripheralId: number;
+    @MaxLength(150)
+    @MinLength(3)
+    readonly namePeripheral: string;
     
 }

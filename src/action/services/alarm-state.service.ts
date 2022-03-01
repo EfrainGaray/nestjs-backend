@@ -1,6 +1,7 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { PersonService } from '.';
 import { CreateAlarmStateDto, UpdateAlarmStateDto } from '../dtos';
 import { AlarmState } from '../entities';
 
@@ -8,14 +9,19 @@ import { AlarmState } from '../entities';
 export class AlarmStateService {
 
     constructor(
-        @InjectRepository(AlarmState) private readonly alarmStateRepository: Repository<AlarmState>
+        @InjectRepository(AlarmState) private readonly alarmStateRepository: Repository<AlarmState>,
+        //public personServices: PersonService
     ) {}
 
     async create(dto: CreateAlarmStateDto): Promise<AlarmState> {
         const alarmStateExist = await this.alarmStateRepository.findOne({ value: dto.value });
         if (alarmStateExist) throw new BadRequestException('Alarm Status already registered with value');
 
-        const newAlarmState = this.alarmStateRepository.create(dto)
+        const newAlarmState = this.alarmStateRepository.create({
+            value:dto.value,
+            date:dto.date,
+            //person:await this.personServices.getForRut(dto.personRut)
+        })
         const  alarmState = await this.alarmStateRepository.save(newAlarmState)
 
         //delete establishment.password;

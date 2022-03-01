@@ -29,5 +29,7 @@ export class CreatePersonDto {
     readonly email: string;
 
     @ApiProperty({required: false})
-    readonly roomId: number;
+    @MaxLength(150)
+    @MinLength(3)
+    readonly nameRoom: string;
 }

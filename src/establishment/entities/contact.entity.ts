@@ -5,6 +5,9 @@ import {
     Entity,  
 
 
+    JoinTable,  
+
+
     ManyToOne,  
 
 
@@ -38,6 +41,7 @@ export class Contact {
     @ManyToOne(() => Establishment, establishment => establishment.contact)
     establishment: Establishment;
 
+    
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;
 

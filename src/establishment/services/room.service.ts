@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { PeripheralService } from 'src/peripheral/services';
 import { Repository } from 'typeorm';
 import { CreateRoomDto, UpdateRoomDto } from '../dtos';
 import { Room } from '../entities';
@@ -9,17 +10,26 @@ import { Room } from '../entities';
 export class RoomService {
 
     constructor(
-        @InjectRepository(Room) private readonly roomRepository: Repository<Room>
+        @InjectRepository(Room) private readonly roomRepository: Repository<Room>,
+        //public peripheralServices: PeripheralService
     ) {}
 
     async create(dto: CreateRoomDto): Promise<Room> {
         const roomExist = await this.roomRepository.findOne({ name: dto.name });
         if (roomExist) throw new BadRequestException('Room already registered with name');
 
-        const newRoom = this.roomRepository.create(dto)
+        const newRoom = this.roomRepository.create({
+            name:dto.name,
+            capacity: dto.capacity,
+            height: dto.height,
+            width: dto.width,
+            length:dto.length,
+            //peripheral: await this.peripheralServices.getForName(dto.namePeripheral)
+
+        })
         const  room = await this.roomRepository.save(newRoom)
 
-        //delete establishment.password;
+
         return room;
     }
 
@@ -30,7 +40,7 @@ export class RoomService {
     }
 
     async get(id: number): Promise<Room>{
-        const room = await this.roomRepository.findOne(id);
+        const room = await this.roomRepository.findOne(id, {relations: [ 'peripheral']});
         if (!room) throw new NotFoundException('Room does not exists')
 
 
@@ -44,8 +54,14 @@ export class RoomService {
     }
 
     async all(): Promise<Room[]> {
-        const  room = await this.roomRepository.find({  })
+        const  room = await this.roomRepository.find({relations: [ 'peripheral']})
         return room;
+    }
+
+    async getForName(name: string): Promise<Room>{
+        const room = await this.roomRepository.findOne({ name: name });
+        if (!room) throw new NotFoundException('Room does not exists')
+        return  room;
     }
 
 }
