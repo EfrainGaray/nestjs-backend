@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 export class CreateBioepidermiologicalParametersDto {
 
-    @ApiProperty({required: true})
+    @ApiProperty({required: false})
     readonly infection_posibility: number;
 
     @ApiProperty({required: false})

@@ -15,7 +15,7 @@ export class EstablismentService {
     ) {}
     
     async all(): Promise<Establishment[]> {
-        const  establishments = await this.establishmentRepository.find({  })
+        const  establishments = await this.establishmentRepository.find()
         return establishments;
     }
     async get(id: number): Promise<Establishment>{
@@ -45,7 +45,7 @@ export class EstablismentService {
         const newEstablishment = this.establishmentRepository.create(dto)
         const  establishment = await this.establishmentRepository.save(newEstablishment)
 
-        //delete establishment.password;
+
         return establishment;
     }
 

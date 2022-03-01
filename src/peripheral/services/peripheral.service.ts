@@ -29,7 +29,7 @@ export class PeripheralService {
     }
 
     async get(id: number): Promise<Peripheral>{
-        const peripheral = await this.peripheralRepository.findOne(id, { relations:['room', 'sensor', 'enviroment_parameter'] });
+        const peripheral = await this.peripheralRepository.findOne(id, { relations:['room', 'sensor'/*, 'enviroment_parameter'*/] });
         if (!peripheral) throw new NotFoundException('Peripheral does not exists')
 
 
@@ -43,7 +43,7 @@ export class PeripheralService {
     }
 
     async all(): Promise<Peripheral[]> {
-        const  peripheral = await this.peripheralRepository.find({ relations:['room', 'sensor', 'enviroment_parameter'] })
+        const  peripheral = await this.peripheralRepository.find({ relations:['room', 'sensor'/*, 'enviroment_parameter'*/] })
         return peripheral;
     }
 

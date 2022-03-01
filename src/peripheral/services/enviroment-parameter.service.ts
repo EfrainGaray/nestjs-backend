@@ -1,14 +1,16 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+
 import { CreateEnviromentalParameterDto, UpdateEnviromentalParameterDto } from '../dtos';
 import { EnviromentParameter } from '../entities';
+import { PeripheralService } from './peripheral.service';
 
 @Injectable()
 export class EnviromentParameterService {
     constructor(
         @InjectRepository(EnviromentParameter) private readonly enviromentalParameterRepository: Repository<EnviromentParameter>, 
-       // public peripheralServices: PeripheralService
+        //public peripheralServices: PeripheralService
     ) {}
     
     async create(dto: CreateEnviromentalParameterDto): Promise<EnviromentParameter> {
@@ -26,7 +28,7 @@ export class EnviromentParameterService {
                 SGP40_voc_index: dto.SPG40_voc_index,
                 SGP40_emp:dto.SPG40_emp,
                 SGP40_hr:dto.SPG40_hr,
-                //peripheral:await this.peripheralServices.getForName(dto.namePeripheral)
+               //peripheral:await this.peripheralServices.getForName(dto.namePeripheral)
              }
         )
         const  enviromentalParameter = await this.enviromentalParameterRepository.save(newEnviromentParameter)

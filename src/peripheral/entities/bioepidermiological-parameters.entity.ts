@@ -20,9 +20,8 @@ import { EnviromentParameter } from ".";
 export class BioepidermiologicalParameters {
     @PrimaryGeneratedColumn()
     id: number;
-    
-   // @Column({ type: 'float' })
-    @Column({ type: 'int' })
+
+    @Column({ type: 'double precision'})
     infection_posibility: number; 
 
     @Column({ type: 'double precision' })
