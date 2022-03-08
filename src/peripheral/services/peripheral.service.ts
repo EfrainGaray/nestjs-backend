@@ -1,5 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { EstablismentService } from 'src/establishment/services';
 import { Repository } from 'typeorm';
 import { CreatePeripheralDto, UpdatePeripheralDto } from '../dtos';
 
@@ -9,14 +10,22 @@ import { Peripheral } from '../entities';
 export class PeripheralService {
 
     constructor(
-        @InjectRepository(Peripheral) private readonly peripheralRepository: Repository<Peripheral>
+        @InjectRepository(Peripheral) private readonly peripheralRepository: Repository<Peripheral>,
+        public establishmentServices: EstablismentService
     ) {}
 
     async create(dto: CreatePeripheralDto): Promise<Peripheral> {
         const peripheralExist = await this.peripheralRepository.findOne({ name: dto.name });
         if (peripheralExist) throw new BadRequestException('Peripheral already registered with name');
 
-        const newPeripheral = this.peripheralRepository.create(dto)
+        const newPeripheral = this.peripheralRepository.create({
+            ip: dto.ip,
+            name: dto.name,
+            localization: dto.localization,
+            date_state: dto.date_state,
+            state: dto.state,
+            establishment: await this.establishmentServices.getForRut(dto.rutEstablishment)
+        })
         const  peripheral = await this.peripheralRepository.save(newPeripheral)
 
         return peripheral;
@@ -29,7 +38,7 @@ export class PeripheralService {
     }
 
     async get(id: number): Promise<Peripheral>{
-        const peripheral = await this.peripheralRepository.findOne(id, { relations:['room', 'sensor'/*, 'enviroment_parameter'*/] });
+        const peripheral = await this.peripheralRepository.findOne(id, { relations:['room', 'sensor', 'establishment'/*, 'enviroment_parameter'*/] });
         if (!peripheral) throw new NotFoundException('Peripheral does not exists')
 
 
@@ -43,7 +52,7 @@ export class PeripheralService {
     }
 
     async all(): Promise<Peripheral[]> {
-        const  peripheral = await this.peripheralRepository.find({ relations:['room', 'sensor'/*, 'enviroment_parameter'*/] })
+        const  peripheral = await this.peripheralRepository.find({ relations:['room', 'sensor', 'establishment'/*, 'enviroment_parameter'*/] })
         return peripheral;
     }
 

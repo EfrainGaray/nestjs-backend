@@ -22,7 +22,12 @@ export class CreatePeripheralDto {
     @ApiProperty({required: false})
     readonly state: number;
 
-    @ApiProperty({required: false})
+    @ApiProperty({required: true})
     readonly date_state: Timestamp;
+
+    @ApiProperty({required: false})
+    @MaxLength(150)
+    @MinLength(3)
+    readonly rutEstablishment: string;
 
 }
