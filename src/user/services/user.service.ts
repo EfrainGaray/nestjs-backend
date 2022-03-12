@@ -7,7 +7,7 @@ import {Repository} from "typeorm";
 import { RolService } from '.';
 import { CreateUserDto, UpdateUserDto } from '../dtos';
 import {  User } from '../entities';
-
+import {hash} from "bcrypt";
 
 export interface UserFindEmail {
     id?: number;
@@ -81,12 +81,13 @@ export class UserService {
            
         const editedUser = Object.assign(user, dto);
         delete editedUser.rol;
-        console.log(editedUser);
+              console.log(dto);
         await this.userRepository.save({
             id:editedUser.id,
             name:editedUser.name,
-            password:editedUser.password,
+            password: await hash(editedUser.password,10),
             email:editedUser.email,
+            avatar:dto.avatar,
             primaryLastName:editedUser.primaryLastName,
             secondLastName:editedUser.secondLastName,
             rut:editedUser.rut,
