@@ -1,4 +1,5 @@
 
+import { Peripheral } from "src/peripheral/entities";
 import {
 
     Column,
@@ -45,6 +46,9 @@ export class Establishment {
 
     @OneToMany(() => Contact, contact => contact.establishment)
     contact: Contact[];
+
+    @OneToMany(() => Peripheral, peripheral => peripheral.establishment)
+    peripheral: Peripheral[];
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

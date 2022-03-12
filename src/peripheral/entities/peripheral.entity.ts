@@ -4,6 +4,7 @@ import {
     Column,
     CreateDateColumn,
     Entity,  
+    ManyToOne,  
     OneToMany,  
     PrimaryGeneratedColumn,
     UpdateDateColumn,
@@ -11,6 +12,7 @@ import {
 } from "typeorm";
 import { EnviromentParameter, Sensor } from ".";
 import { Room } from "src/establishment/entities/room.entity";
+import { Establishment } from "src/establishment/entities";
 
 @Entity('peripheral')
 export class Peripheral {
@@ -29,7 +31,7 @@ export class Peripheral {
     @Column({ type: 'int' })
     state: number; 
 
-    @Column({ type: 'timestamptz' })
+    @Column({ type: 'timestamptz'})
     date_state: Date;
 
     @OneToMany(() => EnviromentParameter, enviromentParameter => enviromentParameter.peripheral)
@@ -40,6 +42,9 @@ export class Peripheral {
 
     @OneToMany(() => Sensor, sensor => sensor.peripheral)
     sensor: Sensor[];
+
+    @ManyToOne(() => Establishment, establishment => establishment.peripheral)
+    establishment: Establishment;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
     createdAt: Date;

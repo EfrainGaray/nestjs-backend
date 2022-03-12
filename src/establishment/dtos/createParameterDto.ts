@@ -29,8 +29,12 @@ export class CreateParameterDto {
     readonly additional_measures: number;
 
     @ApiProperty({required: false})
-    @MaxLength(150)
-    @MinLength(3)
+    @MaxLength(150, {
+        message: 'El máximo permitido es de 150 caracteres',
+      })
+    @MinLength(3, {
+        message: 'El mínimo permitido es de 3 caracteres',
+      })
     readonly sessionDate: string;
     
 

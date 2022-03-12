@@ -30,11 +30,15 @@ export class UserService {
     }
     
     async create(dto: CreateUserDto): Promise<User> {
+        var rol;
         const userExist = await this.userRepository.findOne({ email: dto.email });
         if (userExist) throw new BadRequestException('User already registered with email');
         if(dto.rol){
-            const rol = await this.rolServices.getForCode(dto.rol);
-            if (!rol) throw new BadRequestException('Rol not created');
+            rol = await this.rolServices.getForCode(dto.rol);
+            if (!rol) throw new BadRequestException('Rol not created')
+        }else{
+            rol = await this.rolServices.getForCode('CLIENT');
+            if (!rol) throw new BadRequestException('Rol not created')
         }
 
         if(dto.rutEstablishment){
@@ -55,7 +59,7 @@ export class UserService {
                 primaryLastName:dto.primaryLastName,
                 secondLastName:dto.secondLastName,
                 rut:dto.rut,
-                rol: [await this.rolServices.getForCode(dto.rol)],
+                rol: [await this.rolServices.getForCode(rol)],
                 establishment : [await this.establishmentServices.getForRut(dto.rutEstablishment)],
                 peripheral : [await this.peripheralServices.getForName(dto.namePeripheral)]
         })

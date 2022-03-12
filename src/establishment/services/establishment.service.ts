@@ -15,11 +15,11 @@ export class EstablismentService {
     ) {}
     
     async all(): Promise<Establishment[]> {
-        const  establishments = await this.establishmentRepository.find()
+        const  establishments = await this.establishmentRepository.find({relations:['peripheral']})
         return establishments;
     }
     async get(id: number): Promise<Establishment>{
-        const establishment = await this.establishmentRepository.findOne(id);
+        const establishment = await this.establishmentRepository.findOne(id, {relations:['peripheral']});
         if (!establishment) throw new NotFoundException('Establishment does not exists')
 
 
@@ -51,7 +51,6 @@ export class EstablismentService {
 
     async getForRut(rutF: string): Promise<Establishment>{
         const establishment = await this.establishmentRepository.findOne({ rut: rutF });
-        if (!establishment) throw new NotFoundException('Establishment does not exists')
         return  establishment;
     }
 

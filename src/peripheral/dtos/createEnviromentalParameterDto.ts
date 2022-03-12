@@ -41,7 +41,11 @@ export class CreateEnviromentalParameterDto {
     readonly SPG40_hr: string;
     
     @ApiProperty({required: false})
-    @MaxLength(50)
-    @MinLength(3)
+    @MaxLength(50, {
+        message: 'El máximo permitido es de 50 caracteres',
+      })
+    @MinLength(3, {
+        message: 'El mínimo permitido es de 150 caracteres',
+      })
     readonly namePeripheral: string
 }
