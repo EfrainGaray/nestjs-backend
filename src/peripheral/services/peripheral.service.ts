@@ -58,7 +58,6 @@ export class PeripheralService {
 
     async getForName(name: string): Promise<Peripheral>{
         const peripheral = await this.peripheralRepository.findOne({ name: name });
-        if (!peripheral) throw new NotFoundException('Peripheral does not exists')
         return  peripheral;
     }
 }

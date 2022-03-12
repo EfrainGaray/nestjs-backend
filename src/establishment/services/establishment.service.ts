@@ -51,7 +51,6 @@ export class EstablismentService {
 
     async getForRut(rutF: string): Promise<Establishment>{
         const establishment = await this.establishmentRepository.findOne({ rut: rutF });
-        if (!establishment) throw new NotFoundException('Establishment does not exists')
         return  establishment;
     }
 

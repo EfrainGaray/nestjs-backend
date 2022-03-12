@@ -49,16 +49,16 @@ export class User {
   
     @ManyToMany(() => Establishment)
     @JoinTable()
-    establishment: Establishment[];
+    establishment?: Establishment[];
 
 
     @ManyToMany(() => Rol)
     @JoinTable()
-    rol: Rol[];
+    rol?: Rol[];
 
     @ManyToMany(() => Peripheral)
     @JoinTable()
-    peripheral: Peripheral[];
+    peripheral?: Peripheral[];
 
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
